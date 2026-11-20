@@ -35,26 +35,26 @@ body{display:flex;flex-direction:column;overflow:hidden}
 .viewport{position:relative;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
 #stage,#pstage{position:absolute;inset:0;width:100%;height:100%}
 #pstage{display:none}
-body[data-view="proposal"]{
+body[data-view="proposal"],body[data-view="proposal-backup"]{
   --page:#F6F4EF;--bg:#F6F4EF;--slide-top:#F8F6F2;--slide-bottom:#F1EDE6;--card:#FFFFFF;--foot:#E9E4DA;--btn:#FFFFFF;
   --line:rgba(24,22,18,.10);--text:#171614;--body:#2C2924;--lead:#171614;--muted:#6D675E;
   --teal:#7A6240;--accent:#7A6240;--teal-dim:rgba(122,98,64,.13);--gold:#9A7840;--rose:#8C6E66;--ok:#7A6240;
   --navy:#11100E;--navy-card:#1C1A17;--navy-foot:#0B0A09;--navy-muted:#C9C1B4;--navy-line:rgba(214,192,150,.22);
   --track:#E6E0D6;--progress:#DDD6CA;--primary-ink:#F8F5EF;--glow:rgba(154,120,64,.12);
 }
-body[data-view="proposal"] .slide.navy{
+body[data-view="proposal"] .slide.navy,body[data-view="proposal-backup"] .slide.navy{
   background:
     radial-gradient(760px 340px at 100% 0%, rgba(198,161,91,.2), transparent 58%),
     #11100E;
 }
-body[data-view="proposal"] .slide.navy .tag,
-body[data-view="proposal"] .slide.navy .kicker{color:#E0C890}
-body[data-view="proposal"] .slide.navy .figure.ask,
-body[data-view="proposal"] .slide.navy .figure.ask ~ .usd,
-body[data-view="proposal"] .slide.navy .card.pick > .usd{color:#E4C98A}
-body[data-view="proposal"] .slide.navy .usd{color:#D9C4A0}
-body[data-view="proposal"] .slide.navy .card.pick{border-color:#C6A56A;box-shadow:inset 0 0 0 1px #C6A56A}
-body[data-view="proposal"] .appbar button.primary{background:#7A6240}
+body[data-view="proposal"] .slide.navy .tag,body[data-view="proposal-backup"] .slide.navy .tag,
+body[data-view="proposal"] .slide.navy .kicker,body[data-view="proposal-backup"] .slide.navy .kicker{color:#E0C890}
+body[data-view="proposal"] .slide.navy .figure.ask,body[data-view="proposal-backup"] .slide.navy .figure.ask,
+body[data-view="proposal"] .slide.navy .figure.ask ~ .usd,body[data-view="proposal-backup"] .slide.navy .figure.ask ~ .usd,
+body[data-view="proposal"] .slide.navy .card.pick > .usd,body[data-view="proposal-backup"] .slide.navy .card.pick > .usd{color:#E4C98A}
+body[data-view="proposal"] .slide.navy .usd,body[data-view="proposal-backup"] .slide.navy .usd{color:#D9C4A0}
+body[data-view="proposal"] .slide.navy .card.pick,body[data-view="proposal-backup"] .slide.navy .card.pick{border-color:#C6A56A;box-shadow:inset 0 0 0 1px #C6A56A}
+body[data-view="proposal"] .appbar button.primary,body[data-view="proposal-backup"] .appbar button.primary{background:#7A6240}
 .appbar button,.dock button{background:transparent;color:#F7F8FA;border:1px solid rgba(247,248,250,.22);border-radius:999px;padding:8px 14px;cursor:pointer;font-family:inherit}
 .panel button,.sheet button{background:var(--btn);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font-family:inherit}
 .appbar button.primary{background:#087F78;color:#F7F8FA;border:0;font-weight:700}
@@ -224,7 +224,7 @@ th{color:var(--muted);font-weight:400}
   #panel{padding:10px}
 }
 body.overview .viewport{overflow:auto}
-body.overview #stage,body.overview #pstage{display:none !important}
+body.overview #stage,body.overview #pstage,body.overview #stageBackup,body.overview #pstageBackup{display:none !important}
 #overview-board{display:none;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:20px;align-content:start}
 body.overview #overview-board{display:grid}
 #overview-board button{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:22px 16px;text-align:right;cursor:pointer;font-size:18px;line-height:1.45}
@@ -239,15 +239,22 @@ body.overview #overview-board{display:grid}
 .gate h1,.gate h2{margin:0;font-weight:700;line-height:1.2}
 .gate h1{font-size:40px}
 .gate h2{font-size:28px}
-body[data-view="menu"] #menu,body[data-view="finance"] #finance,body[data-view="horizon"] #horizon{display:flex;flex-direction:column;gap:16px}
-body[data-view="menu"] #menu{justify-content:safe center}
-body[data-view="menu"] #stage,body[data-view="menu"] #pstage,body[data-view="menu"] .dock,body[data-view="proposal"] #stage,body[data-view="proposal"] #proposal,body[data-view="finance"] #stage,body[data-view="finance"] #pstage,body[data-view="finance"] .dock,body[data-view="horizon"] #stage,body[data-view="horizon"] #pstage,body[data-view="horizon"] .dock,body[data-view="deck"] #pstage{display:none !important}
+body[data-view="menu"] #menu,body[data-view="history"] #history,body[data-view="finance"] #finance,body[data-view="horizon"] #horizon{display:flex;flex-direction:column;gap:16px}
+body[data-view="menu"] #menu,body[data-view="history"] #history{justify-content:safe center}
+body[data-view="menu"] #stage,body[data-view="menu"] #pstage,body[data-view="menu"] .dock,body[data-view="history"] #stage,body[data-view="history"] #pstage,body[data-view="history"] .dock,body[data-view="proposal"] #stage,body[data-view="proposal"] #proposal,body[data-view="finance"] #stage,body[data-view="finance"] #pstage,body[data-view="finance"] .dock,body[data-view="horizon"] #stage,body[data-view="horizon"] #pstage,body[data-view="horizon"] .dock,body[data-view="deck"] #pstage{display:none !important}
 body[data-view="proposal"] #pstage{display:block !important}
 body[data-view="proposal"] .dock{display:flex !important}
 body.overview #pstage{display:none !important}
-body:not([data-view="deck"]):not([data-view="proposal"]) #overview,body:not([data-view="deck"]):not([data-view="proposal"]) #pdf{display:none}
+body:not([data-view="deck"]):not([data-view="proposal"]):not([data-view="deck-backup"]):not([data-view="proposal-backup"]) #overview,body:not([data-view="deck"]):not([data-view="proposal"]):not([data-view="deck-backup"]):not([data-view="proposal-backup"]) #pdf{display:none}
+#stageBackup,#pstageBackup{position:absolute;inset:0;width:100%;height:100%;display:none}
+body[data-view="deck-backup"] #stage,body[data-view="deck-backup"] #pstage,body[data-view="proposal-backup"] #stage,body[data-view="proposal-backup"] #pstage{display:none !important}
+body[data-view="deck-backup"] #stageBackup,body[data-view="proposal-backup"] #pstageBackup{display:block !important}
+body[data-view="deck-backup"] .dock,body[data-view="proposal-backup"] .dock{display:flex !important}
+#history .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:980px}
+.card-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.menu-grid .stamp{color:var(--muted);font-size:12px;font-weight:600;white-space:nowrap}
 body:not([data-view="deck"]) #assumptions{display:none}
-body[data-view="menu"] #home,body[data-view="menu"] #now,body[data-view="finance"] #now,body[data-view="horizon"] #now{display:none}
+body[data-view="menu"] #home,body[data-view="menu"] #now,body[data-view="history"] #now,body[data-view="finance"] #now,body[data-view="horizon"] #now{display:none}
 .menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .menu-grid button,.back{text-align:right;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:28px 22px;cursor:pointer;font:inherit}
 .menu-grid button{display:grid;gap:8px;align-content:start}
@@ -271,7 +278,7 @@ button.spend:hover{border-color:var(--accent)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{background:var(--page);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;line-height:1.45}
 @media (max-width:1100px){.menu-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:760px){.menu-grid,.svc-grid{grid-template-columns:1fr}.gate{padding:16px}}
+@media (max-width:760px){.menu-grid,.svc-grid,#history .menu-grid{grid-template-columns:1fr}.gate{padding:16px}.card-line{flex-wrap:wrap}}
 @media print{
   @page{size:338.67mm 190.5mm;margin:0}
   html,body{background:var(--bg);-webkit-print-color-adjust:exact;print-color-adjust:exact;overflow:visible}
@@ -280,7 +287,8 @@ button.spend:hover{border-color:var(--accent)}
   #stage,body.overview #stage{position:static !important;transform:none !important;display:block !important;left:auto !important;top:auto !important}
   .slide,.slide.active,body.overview .slide{display:flex !important;width:338.67mm !important;height:190.5mm !important;aspect-ratio:auto !important;overflow:hidden !important;break-after:page;page-break-after:always;box-shadow:none;animation:none !important}
   #stage>.slide:last-child,#pstage>.slide:last-child{break-after:auto;page-break-after:auto}
-  body:not([data-view="proposal"]) #pstage{display:none !important}
+  body:not([data-view="proposal"]) #pstage,body[data-view="deck-backup"] #stage,body[data-view="proposal-backup"] #stage,body[data-view="proposal-backup"] #pstage,#stageBackup,#pstageBackup{display:none !important}
+  body[data-view="deck-backup"] #stageBackup,body[data-view="proposal-backup"] #pstageBackup{display:block !important;position:static !important}
   body[data-view="proposal"] #stage{display:none !important}
   body[data-view="proposal"] #pstage{position:static !important;transform:none !important;display:block !important}
   .play{display:none !important}
@@ -300,6 +308,7 @@ button.spend:hover{border-color:var(--accent)}
     <button type="button" id="overview" class="icon" title="مرور همه" aria-label="مرور همه"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
     <button type="button" id="theme" class="icon" title="حالت روشن" aria-label="حالت روشن"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     <button type="button" id="full" class="icon" title="تمام‌صفحه (F)" aria-label="تمام‌صفحه، کلید F"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" id="historyBtn" class="icon" data-open="history" title="تاریخچه" aria-label="تاریخچه"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" id="assumptions" class="icon" title="فرض‌های مالی" aria-label="فرض‌های مالی"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M8 7v0M14 12v0M10 17v0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="7" r="1.6" fill="currentColor"/><circle cx="14" cy="12" r="1.6" fill="currentColor"/><circle cx="10" cy="17" r="1.6" fill="currentColor"/></svg></button>
     <button type="button" class="icon primary" id="pdf" title="PDF" aria-label="دریافت PDF"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 3v5h5M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </div>
@@ -314,6 +323,14 @@ button.spend:hover{border-color:var(--accent)}
     <button type="button" data-open="deck"><img class="menu-art" src="art/menu-investment.png" alt=""><span class="idx">۲</span><b>طرح سرمایه‌گذاری خصوصی</b></button>
     <button type="button" data-open="finance"><img class="menu-art" src="art/menu-finance.png" alt=""><span class="idx">۳</span><b>نمای مالی و درآمدی</b></button>
     <button type="button" data-open="horizon"><img class="menu-art" src="art/menu-horizon.png" alt=""><span class="idx">۴</span><b>افق درآمدزایی</b></button>
+  </div>
+</section>
+<section id="history" class="gate">
+  <p class="kicker">سیستم یکپارچه معاملات خودرو</p>
+  <h1>تاریخچه</h1>
+  <div class="menu-grid">
+    <button type="button" data-open="proposal-backup"><img class="menu-art" src="art/menu-proposal.png" alt=""><span class="idx">۱</span><span class="card-line"><b>پروپوزال طرح جامع کسب‌وکار</b><span class="stamp">backup - 20261120</span></span></button>
+    <button type="button" data-open="deck-backup"><img class="menu-art" src="art/menu-investment.png" alt=""><span class="idx">۲</span><span class="card-line"><b>طرح سرمایه‌گذاری خصوصی</b><span class="stamp">backup - 20261120</span></span></button>
   </div>
 </section>
 <section id="horizon" class="gate">
@@ -452,6 +469,358 @@ button.spend:hover{border-color:var(--accent)}
 </aside>
 
 <div id="stage">
+<section class="slide" data-title="فرصت در یک نگاه">
+  <h2>فرصت، یک شبکه معامله است نه یک آگهی‌نامه</h2>
+  <p class="lead">سیستم یکپارچه معاملات خودرو می‌خواهد فروشندگان، خریداران و فعالان حرفه‌ای را از مسیر پلتفرم و فروشگاه‌های حضوری به هم وصل کند. اعتماد برند هنوز در حال ساخت است.</p>
+  <div class="values">
+    <p class="kicker">ارزش افزوده سازمان</p>
+    <ol>
+      <li>امنیت معامله</li>
+      <li>سرعت معامله</li>
+      <li>راحتی معامله</li>
+      <li>شفافیت معامله</li>
+      <li>قیمت منصفانه</li>
+    </ol>
+  </div>
+  <p class="note">این هدف طراحی است، نه نتیجه اندازه‌گیری‌شده.</p>
+  <div class="grid g3">
+    <div class="card"><h3>شروع</h3><p>ایران و تهران؛ خودرو صفر و کارکرده. تا پایان ۱۴۰۵ یک دفتر مرکزی و یک فرانچایز هدف‌گذاری شده، نه شبکه ۳۰تایی.</p></div>
+    <div class="card"><h3>پول این مرحله</h3><p>۳۰ میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵<span class="usd" data-m="30000"></span>. بودجه ناخالص شش‌ماهه ۱۸٫۴۵۵ میلیارد تومان<span class="usd" data-m="18455"></span> داخل همین بخش جا می‌شود. ۳۰ میلیارد تومان دیگر در ۱۴۰۶ برای توسعه شعبه است.</p></div>
+    <div class="card"><h3>خارج از این سرمایه</h3><p>خرید گسترده موجودی خودرو داخل این دو بخش نیست. تا پایان ۱۴۰۶ جمع شعب با بخش توسعه به ۱۰ می‌رسد. از ۱۴۰۷ هر شعبه تازه از درآمد سیستم توسعه داده می‌شود.</p></div>
+  </div>
+  <footer class="foot"><span>وضعیت، هدف و فرض مالی در اسلایدهای بعد جدا شده‌اند</span><span></span></footer>
+</section>
+<section class="slide" data-title="مسئله بازار">
+  <h2>معامله خودرو کند، پراکنده و از نظر اطلاعات نابرابر است</h2>
+  <div class="grid g3">
+    <div class="card"><h3>اعتماد</h3><p>نگرانی از امنیت معامله، اسناد و تسویه.</p></div>
+    <div class="card"><h3>اطلاعات</h3><p>عدم تقارن درباره وضعیت و قیمت خودرو.</p></div>
+    <div class="card"><h3>پراکندگی</h3><p>آگهی‌ها و موجودی فروشندگان در کانال‌های جدا هستند.</p></div>
+    <div class="card"><h3>زمان</h3><p>فروش و نقدشوندگی طول می‌کشد.</p></div>
+    <div class="card"><h3>هماهنگی</h3><p>کارشناسی، مذاکره، قرارداد و تسویه به هم وصل نیستند.</p></div>
+    <div class="card"><h3>نمایشگاه‌دار</h3><p>ابزار یکپارچه مدیریت و تبادل موجودی بین نمایشگاه‌ها محدود است.</p></div>
+  </div>
+  <p class="note" style="margin-top:10px">این توصیف مسئله طراحی است. ادعای اندازه دقیق بازار یا نبود راه‌حل دیگر در این اسلاید نیست.</p>
+  <footer class="foot"><span>مسئله</span><span></span></footer>
+</section>
+<section class="slide" data-title="راهکار">
+  <h2>یک شبکه حضوری و دیجیتال، با کنترل کیفیت مرکزی</h2>
+  <div class="grid g3">
+    <div class="card"><span class="tag">فروشنده</span><h3>فروش قابل‌پیگیری</h3><p>همان ارزش افزوده: امنیت، سرعت، راحتی و شفافیت معامله، و قیمت منصفانه. این وعده محصول است، نه آمار فعلی.</p></div>
+    <div class="card"><span class="tag">خریدار</span><h3>انتخاب قابل‌مقایسه</h3><p>تنوع عرضه، اطلاعات به‌روز، گزارش کارشناسی و پشتیبانی معامله.</p></div>
+    <div class="card"><span class="tag">نمایشگاه‌دار</span><h3>موجودی و دسترسی</h3><p>ابزار مدیریت موجودی، دسترسی به خریدار، فروش سریع‌تر و معامله با نمایشگاه‌های دیگر.</p></div>
+  </div>
+  <p class="note" style="margin-top:12px">شریک فرانچایز زیر برند مشترک از فناوری، بازاریابی و پشتیبانی مرکزی استفاده می‌کند. دو متقاضی وجود دارند؛ قرارداد قطعی ادعا نمی‌شود.</p>
+  <footer class="foot"><span>یکپارچه‌کردن عرضه پراکنده یک فرض راهبردی است</span><span></span></footer>
+</section>
+<section class="slide" data-title="مدل معاملات">
+  <h2>پنج مسیر فعالیت؛ درآمد پایه فقط کمیسیون است</h2>
+  <ol class="paths">
+    <li><span>۱</span><p>اتصال مستقیم خریدار و فروشنده</p></li>
+    <li><span>۲</span><p>عرضه موجودی نمایشگاه‌داران</p></li>
+    <li><span>۳</span><p>معامله بین نمایشگاه‌داران</p></li>
+    <li><span>۴</span><p>فروش امانی</p></li>
+    <li class="aside"><span>۵</span><p>موجودی شرکت، با تأمین مالی جدا و مرحله‌ای</p></li>
+  </ol>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card"><h3>درآمد شروع</h3><p>کمیسیون از خریدار گرفته می‌شود و فروشنده کمیسیون نمی‌دهد. ارزش خودرو «حجم معاملات» است، نه درآمد سیستم یکپارچه معاملات خودرو.</p></div>
+    <div class="card"><h3>خارج از پیش‌بینی پایه</h3><p>استعلام، قیمت‌گذاری، ضمانت تکمیلی، اسناد، حمل، تسهیلات و تجهیزات. این‌ها درآمد قطعی نیستند و با کمیسیون جمع نشده‌اند.</p></div>
+  </div>
+  <footer class="foot"><span>حاشیه خریدوفروش موجودی شرکت داده کافی ندارد و وارد مدل پایه نشده است</span><span></span></footer>
+</section>
+<section class="slide" data-title="شبکه نمایشگاه‌داران">
+  <h2>عرضه پراکنده، اگر به هم وصل شود، بازار دومی می‌سازد</h2>
+  <div class="sides">
+    <section>
+      <h3>برای نمایشگاه‌دار</h3>
+      <ol>
+        <li>مدیریت موجودی داخل همین مجموعه محصول، نه لزوماً محصول پنجم</li>
+        <li>دیده شدن توسط خریداران شبکه</li>
+        <li>امکان معامله با نمایشگاه‌دار دیگر</li>
+      </ol>
+    </section>
+    <section>
+      <h3>برای سیستم یکپارچه معاملات خودرو</h3>
+      <ol>
+        <li>موجودی بدون تملک گسترده خودرو</li>
+        <li>داده قیمت و تقاضا</li>
+        <li>کانال توسعه فرانچایز</li>
+      </ol>
+    </section>
+  </div>
+  <p class="note" style="margin-top:12px">این فرصت یک فرض راهبردی است. بررسی این ارائه ثابت نکرده که در ایران مسیر مشابهی وجود ندارد.</p>
+  <footer class="foot"><span>ابزار نمایشگاه‌دار هنوز در حال توسعه است</span><span></span></footer>
+</section>
+<section class="slide" data-title="محصول و هوش مصنوعی">
+  <h2>چهار محصول متصل؛ هوش مصنوعی هدف است نه وضعیت فعلی</h2>
+  <div class="grid g4">
+    <div class="card"><h3>وب‌سایت</h3><p>تخمین قیمت، درخواست فروش، نمایش خودرو و پیگیری.</p></div>
+    <div class="card"><h3>اپ خریداران</h3><p>جست‌وجو، فیلتر، گزارش کارشناسی و درخواست خرید برای مصرف‌کننده و خریدار حرفه‌ای.</p></div>
+    <div class="card"><h3>اپ کارشناسی</h3><p>اطلاعات، تصویر، چک‌لیست و گزارش استاندارد.</p></div>
+    <div class="card"><h3>بک‌آفیس</h3><p>شعب، کاربران، موجودی، سرنخ، معامله، سهم، تسویه و عملکرد.</p></div>
+  </div>
+  <p class="note" style="margin-top:10px">بک‌آفیس، اپ کارشناسی و اپ فروش در حال توسعه‌اند و نسخه قابل نمایش اکنون وجود ندارد. رونمایی در آذر ۱۴۰۵ است. هوش مصنوعی هدف بعدی است، نه وضعیت فعلی.</p>
+  <footer class="foot"><span>رونمایی: آذر ۱۴۰۵</span><span>اکنون قابل نمایش نیست</span></footer>
+</section>
+<section class="slide" data-title="وضعیت فعلی">
+  <h2>آمادگی تیم هست؛ اثبات عملیاتی هنوز نیست</h2>
+  <div class="sides">
+    <section>
+      <h3>آنچه اعلام شده</h3>
+      <ol>
+        <li>حامد رحیمی مدیرعامل، سهیل مقدم معاون اجرایی، و سعید محمدی مدیر فناوری</li>
+        <li>دو متقاضی فرانچایز، بدون قرارداد قطعی</li>
+        <li>نرم‌افزار در حال توسعه است؛ رونمایی آذر ۱۴۰۵. نسخه قابل نمایش اکنون نیست</li>
+        <li>آشنایی اولیه مشتریان از روابط موجود تیم</li>
+      </ol>
+    </section>
+    <section>
+      <h3>آنچه نباید فرض شود</h3>
+      <ol>
+        <li>شرکت هنوز ثبت نشده</li>
+        <li>معامله ثبت‌شده، درآمد یا مشتری پرداخت‌کننده اعلام نشده</li>
+        <li>دفتر یا ملک شرکت موجود نیست و باید تأمین شود</li>
+        <li>مجوز، قرارداد عملیاتی یا نتیجه فروش اثبات‌شده در این طرح نیست</li>
+      </ol>
+    </section>
+  </div>
+  <footer class="foot"><span>ثبت شرکت هم‌زمان با جذب سرمایه برنامه‌ریزی می‌شود</span><span></span></footer>
+</section>
+<section class="slide" data-title="مرکز و فرانچایز">
+  <h2>تا پایان ۱۴۰۵ یک دفتر مرکزی و یک فرانچایز</h2>
+  <div class="grid g2">
+    <div class="card"><h3>دفتر مرکزی</h3><p>فضایی در یک محل که هم کار اداری را پوشش دهد و هم امکان پذیرش خودرو داشته باشد. متراژ و تعداد طبقه نهایی نشده. هماهنگی شعب، بازاریابی، فناوری، پشتیبانی، آموزش و کنترل کیفیت. همه هزینه‌ها با شرکت. پیش اجاره شعبه مرکزی ۵ میلیارد تومان<span class="usd" data-m="5000"></span> وجه درگیر است، نه هزینه مصرف‌شده. اجاره همان شعبه ۴۰۰ میلیون تومان<span class="usd" data-m="400"></span> در ماه. تجهیز دفتر مرکزی و شعبه مرکزی ۳ میلیارد تومان<span class="usd" data-m="3000"></span>، برآورد تیم.</p></div>
+    <div class="card"><h3>یک فرانچایز</h3><p>تا پایان ۱۴۰۵ افتتاح می‌شود و شروع به کار می‌کند. ملک، تجهیز، نیرو و عملیات با شریک. بازاریابی مرکزی و زیرساخت با سیستم یکپارچه معاملات خودرو. کمیسیون وصول‌شده ۵۰/۵۰. تعدیل بابت ضمانت، افیلیت و برگشت هنوز نهایی نیست. محل شعبه هنوز مشخص نشده است.</p></div>
+  </div>
+  <p class="note" style="margin-top:8px">کارشناس ۴۰ میلیون تومان<span class="usd" data-m="40"></span> و سرپرست ۵۰ میلیون تومان<span class="usd" data-m="50"></span> در ماه، اعلام تیم. پاداش دو نفر در هر معامله فروشگاه شرکت ۵۰۰ هزار تومان<span class="usd" data-m="0.5"></span> تا ۱ میلیون تومان<span class="usd" data-m="1"></span>؛ میانگین محاسباتی ۷۵۰ هزار تومان<span class="usd" data-m="0.75"></span> یک فرض است.</p>
+  <footer class="foot"><span>مدل شعبه</span><span></span></footer>
+</section>
+<section class="slide" data-title="بازار و رقبا">
+  <h2>با ۳۰ شعبه، هدف ماهانه ۲٬۰۰۰ معامله است</h2>
+  <div class="grid g3">
+    <div class="card"><span class="tag">بازار</span><div class="figure" style="font-size:22px">۵ میلیون</div><span class="unit">معامله سالانه خودرو، از تعویض پلاک ناجا. ناوگان حدود ۲۵ میلیون سواری است و همه معامله نمی‌شوند.</span></div>
+    <div class="card"><span class="tag">هدف ۳۰ شعبه</span><div class="figure" style="font-size:22px">۲٬۰۰۰</div><span class="unit">فروش ماهانه. سالانه ۲۴ هزار خودرو.</span></div>
+    <div class="card"><span class="tag">سهم از بازار</span><div class="figure" id="shareOfMarket">۰٫۴۸٪</div><span class="unit">۲۴ هزار معامله از ۵ میلیون. هدف شبکه است، نه فروش تحقق‌یافته.</span></div>
+  </div>
+  <table style="margin-top:8px">
+    <thead><tr><th>بازیگر</th><th>جذب</th><th>کارشناسی</th><th>معامله</th><th>حضور فیزیکی</th></tr></thead>
+    <tbody>
+      <tr><td>همراه مکانیک</td><td>۵۰٪ از درخواست فروش، رزرو و جذب</td><td>۵۰٪ از رزروها</td><td>حدود ۴۰ هزار در سال</td><td>دارد</td></tr>
+      <tr><td>دیوار</td><td>روزانه ۸ تا ۱۰ هزار آگهی خودرو، شامل تکراری</td><td>داده دقیق نیست</td><td>داده دقیق معامله نیست</td><td>دارد</td></tr>
+      <tr><td>سایر پلتفرم‌ها و نمایشگاه‌های آفلاین</td><td>باقی بازار</td><td>در آفلاین نامتجانس</td><td>باقی‌مانده بازار</td><td>دارد</td></tr>
+    </tbody>
+  </table>
+  <p class="note">در نمونه‌های فعال این بازار روزانه نزدیک ۲۰ هزار درخواست فروش می‌آید. معمولاً ۵۰٪ رزرو و جذب می‌شود، ۵۰٪ از رزروها کارشناسی می‌شود و ۳۰٪ از کارشناسی‌شده‌ها معامله می‌شود. سود معامله خودرو معمولاً ۲ تا ۴ درصد قیمت است؛ خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان. سود تسهیلات موضوع جداست: کارنامه پارسال حدود ۱۰۰ میلیارد تومان<span class="usd" data-m="100000"></span> سود فقط از اعطای تسهیلات خودرو داشته و این رقم تعداد معامله نیست. تا ۱۴۰۳ فاصله تعویض خودرو حدود ۵ سال بوده و به‌تدریج به سمت ۳ سال می‌رود، چون خودرو در ایران ماهیت سرمایه‌گذاری دارد. برای حدود ۶۰٪ مردم، دارایی اصلی اول خودرو است، نه ملک.</p>
+  <footer class="foot"><span>حجم رقبا حدودی است</span><span></span></footer>
+</section>
+<section class="slide" data-title="جذب مشتری">
+  <h2>لید از کانال‌های مختلف می‌آید و باید قابل‌سنجش بماند</h2>
+  <div class="leads">
+    <span>تبلیغ در بله</span>
+    <span>جایگاه در سوپراپ‌ها</span>
+    <span>یکتانت</span>
+    <span>کمپین تبلیغاتی</span>
+    <span>کانال‌های آگهی</span>
+    <span>پیج‌های اینستاگرام</span>
+    <span>تبلیغات محیطی</span>
+    <span>پمپ بنزین</span>
+    <span>کارواش و مراکز خدمات خودرو</span>
+    <span>وب‌سایت ارگانیک و دایرکت</span>
+    <span>نمایشگاه‌های ماشین</span>
+    <span>نتورک مارکتینگ</span>
+  </div>
+  <div class="card"><h3>افیلیت</h3><p>در ساختار خرید و فروش، نرخ جذب معمولاً ۲۵٪ است و برای این ساختار نرخ خوبی حساب می‌شود. پاداش بعد از معامله موفق و وصول است. معرفی تکراری باید کنترل شود. مبلغ پاداش هنوز نهایی نشده و در مدل، هزینه متغیر و قابل‌مشاهده است.</p></div>
+  <p class="note">بازاریابی تا پایان ۱۴۰۵ در جمع هزینه ثابت، ۳۰۰ میلیون تومان<span class="usd" data-m="300"></span> در ماه، اعلام تیم است. هزینه هر معامله موفق باید بعداً جدا اندازه گرفته شود.</p>
+  <footer class="foot"><span>جذب</span><span></span></footer>
+</section>
+<section class="slide" data-title="اقتصاد معامله">
+  <h2>کمیسیون از خریدار است؛ فروشنده کمیسیون نمی‌دهد</h2>
+  <div class="grid g3">
+    <div class="card"><span class="tag">بازه کمیسیون</span><p>سود معامله معمولاً ۲ تا ۴ درصد قیمت است. خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان<span class="usd" data-m="80"></span>. قیمت متوسط مدل ۲٫۵ میلیارد تومان<span class="usd" data-m="2500"></span> است. محافظه‌کارانه ۵۰ میلیون، پیش‌فرض ۶۰ میلیون، و بالاتر ۱۰۰ میلیون تومان از خریدار.</p></div>
+    <div class="card"><span class="tag">سناریوی انتخاب‌شده</span><div class="figure" id="unitCommission">۶۰</div><span class="unit">میلیون تومان از خریدار. فروشنده کمیسیون نمی‌دهد. قبل از تقسیم شعبه.</span><span class="usd block" id="unitUsd" data-m="60"></span></div>
+    <div class="card"><span class="tag">سهم سیستم یکپارچه معاملات خودرو</span><p id="unitSplit">فروشگاه شرکت: کل کمیسیون منهای پاداش. فرانچایز: ۵۰٪ کمیسیون. پاداش فقط برای معامله فروشگاه شرکت در مدل نشسته است.</p></div>
+  </div>
+  <p class="note" id="unitNote" style="margin-top:10px"></p>
+  <footer class="foot"><span>موجودی ملکی و کمیسیون در یک عدد جمع نشده‌اند</span><span></span></footer>
+</section>
+<section class="slide" data-title="سناریو و سربه‌سر">
+  <h2>درآمد ماه، و ماهی که جمع مانده عملیاتی مثبت می‌شود</h2>
+  <div class="grid g4" id="scenarioCards"></div>
+  <p class="note" id="breakevenNote"></p>
+  <footer class="foot"><span>این سربه‌سر بازگشت سرمایه، ودیعه یا تجهیز نیست</span><span></span></footer>
+</section>
+<section class="slide" data-title="راه‌اندازی ۱۴۰۵">
+  <h2>تقویم پیشنهادی است؛ هیچ‌کدام انجام‌شده حساب نمی‌شود</h2>
+  <div class="grid g4">
+    <div class="card"><h3>آذر ۱۴۰۵</h3><p>رونمایی نسخه اولیه. اکنون نسخه قابل نمایش وجود ندارد.</p></div>
+    <div class="card"><h3>دی</h3><p>هدف راه‌اندازی مرکز و معاملات اولیه.</p></div>
+    <div class="card"><h3>بهمن</h3><p>هدف فعال‌سازی یک فرانچایز.</p></div>
+    <div class="card"><h3>اسفند</h3><p>سنجش عملکرد و تصویب توسعه.</p></div>
+  </div>
+  <div class="grid g2" style="margin-top:10px">
+    <div class="card"><h3>مسیر فروش هر فروشگاه</h3><p>ماه اول ۵، ماه دوم ۱۳، سپس ۲۶ معامله. این هدف برنامه‌ریزی است. ماه سوم از تاریخ شروع واقعی همان فروشگاه حساب می‌شود، نه از یک تاریخ واحد برای هر دو.</p></div>
+    <div class="card"><h3>۱۰۰ خودرو</h3><p>هدف عرضه اولیه در کل شبکه است. موجودی ملکی شرکت نیست و خرید آن با این سرمایه انجام نمی‌شود. ماندگاری یک‌هفته‌ای فقط فرض تیم برای خودروی خریداری‌شده است و در گردش سرمایه پایه استفاده نشده.</p></div>
+  </div>
+  <footer class="foot"><span>ورود روزانه ۳ خودرو و تبدیل حدود ۳۳٪ فرض تیم است</span><span></span></footer>
+</section>
+<section class="slide" data-title="سی فروشگاه">
+  <h2>سه عدد را با هم قاطی نکنید</h2>
+  <p class="lead">هدف تجاری ۳۰ شعبه، ۲٬۰۰۰ معامله در ماه است. ضرب این عدد در کمیسیون، درآمد ناخالص قبل از تقسیم فرانچایز است. ترکیب سال چهارم: ۲۰ شعبه شرکت و ۱۰ فرانچایز. این فروش تحقق‌یافته نیست و پایان ۱۴۰۶ هم نیست.</p>
+  <div id="layerCards" class="grid g3"></div>
+  <p class="note" id="layerNote"></p>
+  <footer class="foot"><span>خدمات در مدل پایه صفر است</span><span>فرض ۲۶ معامله در پیوست است</span></footer>
+</section>
+<section class="slide" data-title="توسعه چهارساله">
+  <h2>رسیدن به ۳۰ شعبه، سناریوی سال چهارم است</h2>
+  <p class="lead">این جدول پیشنهاد اولیه است، نه پیش‌بینی اثبات‌شده. پایان ۱۴۰۵ همان سال اول است: یک دفتر مرکزی و یک فرانچایز.</p>
+  <table>
+    <thead><tr><th>سال</th><th>تقویم</th><th>شعب شرکت</th><th>فرانچایز</th><th>مجموع</th></tr></thead>
+    <tbody>
+      <tr><td>سال اول</td><td>پایان ۱۴۰۵</td><td>۱</td><td>۱</td><td>۲</td></tr>
+      <tr><td>سال دوم</td><td>پایان ۱۴۰۶</td><td>۷</td><td>۳</td><td>۱۰</td></tr>
+      <tr><td>سال سوم</td><td>پایان ۱۴۰۷</td><td>۱۲</td><td>۵</td><td>۱۷</td></tr>
+      <tr><td>سال چهارم</td><td>پایان ۱۴۰۸</td><td>۲۰</td><td>۱۰</td><td>۳۰</td></tr>
+    </tbody>
+  </table>
+  <p class="note">تا پایان ۱۴۰۶ جمع شعب ۱۰ است و ۳۰ میلیارد تومان همان سال برای همین توسعه شعبه است. از ۱۴۰۷ هر شعبه تازه‌ای که باز شود از درآمد سیستم تأمین می‌شود. هزینه افتتاح، ظرفیت واقعی هر شعبه و سرعت جذب مشتری هنوز باید بررسی شود.</p>
+  <footer class="foot"><span>سناریوی پیشنهادی</span><span>۳۰ شعبه پایان ۱۴۰۶ نیست</span></footer>
+</section>
+<section class="slide" data-title="تیم">
+  <h2>تیم اولیه کوچک است و نقش‌های مرکزی هنوز باید کامل شوند</h2>
+  <div class="sides">
+    <section>
+      <h3>حاضر</h3>
+      <ol>
+        <li><span><b>حامد رحیمی، مدیرعامل</b>استراتژی، توسعه و مدیریت اجرایی. حدود هشت سال در معاملات خودرو. ۲۵٪ سهام.</span></li>
+        <li><span><b>سهیل مقدم، معاون اجرایی</b>هماهنگی واحدها، اجرای فرایند و عملکرد شعب. ۲۵٪ سهام.</span></li>
+        <li><span><b>سعید محمدی، مدیر فناوری</b>پلتفرم، داده و امنیت. ۲۵٪ سهام. حقوق پیشنهادی ۱۰۰ میلیون تومان<span class="usd" data-m="100"></span> با زیرساخت فنی و ذخیره توسعه نرم‌افزار یکی نیست.</span></li>
+      </ol>
+    </section>
+    <section>
+      <h3>باید کامل شود</h3>
+      <ol>
+        <li><span><b>کارشناس و سرپرست فروشگاه</b>باید جذب شود. ۴۰ میلیون تومان<span class="usd" data-m="40"></span> و ۵۰ میلیون تومان<span class="usd" data-m="50"></span>، اعلام تیم.</span></li>
+        <li><span><b>مالی، حقوقی، منابع انسانی</b>نیازمند نهایی‌سازی. داخل ذخیره ۷۰ میلیون تومان<span class="usd" data-m="70"></span>، نه چارت قطعی.</span></li>
+      </ol>
+    </section>
+  </div>
+  <p class="note" style="margin-top:8px">حقوق و مزایای سه مدیر مؤسس بابت کار اجرایی در بودجه عملیاتی است و از سود سهام جداست. سرمایه‌گذار هم ۲۵٪ است. حقوق مدیر فناوری با زیرساخت فنی ۵۰ میلیون تومان<span class="usd" data-m="50"></span> و ذخیره توسعه نرم‌افزار ۱۰۰ میلیون تومان<span class="usd" data-m="100"></span> یکی نیست.</p>
+  <footer class="foot"><span>تیم</span><span></span></footer>
+</section>
+<section class="slide" data-title="ریسک و اعتماد">
+  <h2>اعتماد باید ساخته شود؛ ضمانت هنوز سیاست پیشنهادی است</h2>
+  <p>عبارت مجاز: «ضمانت جبران مغایرت کارشناسی و بازگشت وجه در موارد مشمول، مطابق شرایط قرارداد.»</p>
+  <div class="grid g4">
+    <div class="card"><h3>کارشناسی</h3><p>استاندارد، آموزش، ممیزی. خطای انسانی حذف نمی‌شود.</p></div>
+    <div class="card"><h3>اسناد</h3><p>کنترل مدارک و تأیید چندمرحله‌ای.</p></div>
+    <div class="card"><h3>فرانچایز</h3><p>قرارداد، آموزش و پایش. کیفیت شریک تضمینی نیست.</p></div>
+    <div class="card"><h3>نقدینگی</h3><p>ذخیره، تأخیر وصول و سقف خرید موجودی.</p></div>
+  </div>
+  <p class="note">هفت روز تقویمی برای اعلام مغایرت مهم، کارشناسی مجدد، و جبران یا بازگشت فقط در موارد قرارداد. انصراف شخصی و افت قیمت بازار در پوشش اولیه نیست. مسئولیت فروشنده، فرانچایز و سیستم یکپارچه معاملات خودرو هنوز باید در قرارداد مشخص شود. عدد خسارت ساخته نشده است.</p>
+  <footer class="foot"><span>رشد شبکه به عملکرد مرحله قبل مشروط است</span><span></span></footer>
+</section>
+<section class="slide" data-title="مصرف سرمایه">
+  <h2>۳۰ میلیارد ۱۴۰۵ در پنج سرفصل دیده می‌شود و ۳۰ میلیارد ۱۴۰۶ برای شعبه است</h2>
+  <table>
+    <thead><tr><th>سرفصل</th><th>مبلغ</th><th>زمان</th><th>خروجی قابل‌سنجش</th></tr></thead>
+    <tbody id="useBody"></tbody>
+  </table>
+  <p class="note" id="useNote"></p>
+  <footer class="foot"><span>باقی راه‌اندازی ۱۴۰۵ ریز نشده</span><span>از ۱۴۰۷ شعبه از درآمد سیستم</span></footer>
+</section>
+<section class="slide" data-title="سناریوی ارزش">
+  <h2>۴ همت سناریوی هدف است، نه ارزش تضمین‌شده</h2>
+  <div class="card"><h3>سناریوی سال چهارم</h3><p id="targetValue"></p></div>
+  <div class="grid g4" style="margin-top:10px">
+    <div class="card"><h3>سود عملیاتی</h3><p id="methodEbitda"></p></div>
+    <div class="card"><h3>درآمد تکرارشونده</h3><p>در مدل پایه درآمد خدمات صفر است. کمیسیون هر معامله، اشتراک ماهانه نیست.</p></div>
+    <div class="card"><h3>رشد شبکه</h3><p>جدول چهارساله سناریوی پیشنهادی است. شمار شعبه به‌تنهایی ارزش قطعی نمی‌سازد.</p></div>
+    <div class="card"><h3>شرکت‌های مشابه</h3><p>معامله واقعی بازار برای ارزش‌گذاری در این طرح نیست. حجم همراه مکانیک، مضرب ارزش نیست.</p></div>
+  </div>
+  <footer class="foot"><span>سناریوی ارزش‌گذاری هدف</span><span>نتیجه تضمین‌شده نیست</span></footer>
+</section>
+<section class="slide" data-title="پیوست فرض‌ها">
+  <h2>هزینه ماهانه از این اقلام ساخته می‌شود</h2>
+  <div class="grid g2 cost-board">
+    <div class="card">
+      <span class="tag">جمع ماهانه</span>
+      <div class="figure" id="fixedTotal">۱٫۴۵</div>
+      <span class="unit" id="fixedTotalUnit">میلیارد تومان، بدون ودیعه و تجهیز</span>
+      <span class="usd block" id="fixedUsd" data-m="1450"></span>
+      <div class="cost-lines">
+        <label><span>اجاره شعبه مرکزی</span><span class="cost-bar"><span id="bar-cRent"></span></span><input id="cRent" type="number" min="0" step="1" value="400"><span class="usd" id="usd-cRent" data-m="400"></span></label>
+        <label><span>کارشناس و سرپرست</span><span class="cost-bar"><span id="bar-cStaff"></span></span><input id="cStaff" type="number" min="0" step="1" value="90"><span class="usd" id="usd-cStaff" data-m="90"></span></label>
+        <label><span>سه مدیر</span><span class="cost-bar"><span id="bar-cManagers"></span></span><input id="cManagers" type="number" min="0" step="1" value="260"><span class="usd" id="usd-cManagers" data-m="260"></span></label>
+        <label><span>زیرساخت فنی</span><span class="cost-bar"><span id="bar-cInfra"></span></span><input id="cInfra" type="number" min="0" step="1" value="50"><span class="usd" id="usd-cInfra" data-m="50"></span></label>
+        <label><span>بازاریابی</span><span class="cost-bar"><span id="bar-cMarket"></span></span><input id="cMarket" type="number" min="0" step="1" value="300"><span class="usd" id="usd-cMarket" data-m="300"></span></label>
+        <label><span>توسعه نرم‌افزار</span><span class="cost-bar"><span id="bar-cSoft"></span></span><input id="cSoft" type="number" min="0" step="1" value="100"><span class="usd" id="usd-cSoft" data-m="100"></span></label>
+        <label><span>تله‌مارکتینگ</span><span class="cost-bar"><span id="bar-cTele"></span></span><input id="cTele" type="number" min="0" step="1" value="100"><span class="usd" id="usd-cTele" data-m="100"></span></label>
+        <label><span>مالی و اداری</span><span class="cost-bar"><span id="bar-cAdmin"></span></span><input id="cAdmin" type="number" min="0" step="1" value="70"><span class="usd" id="usd-cAdmin" data-m="70"></span></label>
+        <label><span>بیمه و استخدام</span><span class="cost-bar"><span id="bar-cInsure"></span></span><input id="cInsure" type="number" min="0" step="1" value="80"><span class="usd" id="usd-cInsure" data-m="80"></span></label>
+      </div>
+    </div>
+    <div>
+      <div class="card fit-lines">
+        <span class="tag">تجهیز، یک‌بار</span>
+        <label>دفتر و شعبه مرکزی<input id="centerFit" type="number" min="0" step="1" value="3000"></label>
+        <p class="note">پیش اجاره شعبه مرکزی ۵ میلیارد تومان<span class="usd" data-m="5000"></span> است. داخل جمع ماهانه و داخل تجهیز نیست.</p>
+        <label>هر شعبه شرکت<input id="branchFit" type="number" min="0" step="1" value="225"></label>
+        <p class="note" id="branchFitNote"></p>
+      </div>
+      <div class="card" style="margin-top:10px">
+        <span class="tag">نیازمند نهایی‌سازی</span>
+        <div class="leads">
+          <span>محل شعب</span><span>مبلغ افیلیت</span><span>تعدیل ضمانت</span><span>تأخیر وصول</span><span>تاریخ قیمت روز دلار</span><span>رشد هزینه ۱۴۰۶</span><span>سود موجودی</span><span>قرارداد فرانچایز</span><span>ثبت شرکت</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note" id="assumptionLive"></p>
+  <footer class="foot"><span>حقوق فناوری با زیرساخت و ذخیره توسعه یکی نیست</span><span>ودیعه و تجهیز داخل جمع ماهانه نیست</span></footer>
+</section>
+<section class="slide" data-title="پیوست جریان نقدی">
+  <h2>شش ماه اول: بودجه ناخالص جدا از نیاز اوج نقدینگی</h2>
+  <table>
+    <thead><tr><th>ماه</th><th>معامله هر شعبه</th><th>معامله همه شعب</th><th>درآمد</th><th>ثابت</th><th>متغیر</th><th>خالص ماه</th><th>نقد دریافتی</th></tr></thead>
+    <tbody id="cashBody"></tbody>
+  </table>
+  <p class="note" id="cashNote"></p>
+  <footer class="foot"><span>دو ستون اول تعداد معامله است؛ بقیه میلیون تومان</span><span>ودیعه هزینه عملیاتی نیست</span></footer>
+</section>
+<section class="slide" data-title="پیوست سی فروشگاه">
+  <h2>سناریوی سال چهارم: ۲۰ شعبه شرکت و ۱۰ فرانچایز</h2>
+  <table>
+    <thead><tr><th>ترکیب</th><th>شرکت</th><th>فرانچایز</th><th>درآمد ماه ظرفیت</th><th>هزینه ماه مقایسه‌ای</th><th>سرمایه ملک شعب جدید</th></tr></thead>
+    <tbody id="mixBody"></tbody>
+  </table>
+  <p class="note">درآمد این جدول از معامله هر فروشگاه در پنل است، پیش‌فرض ۲۶ معامله، نه هدف ۲٬۰۰۰تایی کل شبکه. هزینه مقایسه‌ای، هزینه ثابت فعلی به‌علاوه نیروی و اجاره قیاس‌شده شعب جدید شرکت است و رشد بازاریابی را صفر نشان می‌دهد مگر در پنل عوض شود. توسعه تا ۱۰ شعبه در ۳۰ میلیارد سال ۱۴۰۶ است. از ۱۴۰۷ به بعد شعبه جدید، از جمله مسیر ۳۰ شعبه سال چهارم، از درآمد سیستم تأمین می‌شود. همه ارقام به قیمت مبنای فعلی، قبل از رشد هزینه‌ها.</p>
+  <footer class="foot"><span>پیوست توسعه</span><span></span></footer>
+</section>
+<section class="slide" data-title="پیوست تورم و دلار">
+  <h2>نمای دلاری با نرخ روز فرض‌ها حساب می‌شود</h2>
+  <div class="grid g3" id="fxCards"></div>
+  <p class="note">تومان تقسیم بر تومانِ هر دلار برابر دلار حسابداری است. این بازده واقعی دلاری نیست، چون نرخ در طول زمان و ارزش پایان دوره جدا مدل نشده‌اند. اگر رشد قیمت روشن باشد، فقط کمیسیون درصدی را عوض می‌کند. کمیسیون مبلغ ثابت با آن جمع نمی‌شود. افزایش قیمت موجودی خودرو سود واسطه‌گری حساب نمی‌شود.</p>
+  <footer class="foot"><span>نرخ روز در فرض‌های مالی عوض می‌شود</span><span>تبدیل حسابداری است، نه بازده واقعی دلاری</span></footer>
+</section>
+<section class="slide" data-title="پیوست ضمانت">
+  <h2>چارچوب ضمانت پیشنهاد است و هنوز عملیاتی نشده</h2>
+  <div class="grid g2">
+    <div class="card"><h3>پوشش پیشنهادی</h3><ul>
+      <li>مهلت اعلام: ۷ روز تقویمی</li>
+      <li>موضوع: مغایرت مهم با گزارش کارشناسی یا مشخصات قرارداد</li>
+      <li>مسیر: ثبت درخواست و کارشناسی مجدد</li>
+      <li>نتیجه ممکن: جبران یا بازگشت خودرو و وجه، فقط اگر قرارداد شامل شود</li>
+    </ul></div>
+    <div class="card"><h3>خارج از پوشش اولیه</h3><ul>
+      <li>انصراف شخصی</li>
+      <li>افت قیمت بازار</li>
+      <li>حق بازگشت بی‌قیدوشرط</li>
+      <li>عدد ذخیره خسارت بدون داده واقعی</li>
+    </ul></div>
+  </div>
+  <p class="note">اگر در پنل برای ذخیره ضمانت عددی بگذارید، فقط حساسیت جریان نقدی است. پیش‌فرض آن صفر است تا خسارت خیالی ساخته نشود.</p>
+  <footer class="foot"><span>مسئولیت سه طرف هنوز باز است</span><span></span></footer>
+</section>
 <section class="slide navy" data-title="کاور">
   <div class="kicker">طرح سرمایه‌گذاری خصوصی</div>
   <h1>سیستم یکپارچه معاملات خودرو</h1>
@@ -467,6 +836,435 @@ button.spend:hover{border-color:var(--accent)}
     <path d="M48 96 C70 96 78 78 110 74 H190 C214 74 224 86 236 90 H286 C300 90 306 84 312 78" fill="none" stroke="#D5A547" stroke-width="2"/>
     <circle cx="118" cy="100" r="10" fill="none" stroke="#f4f1ea"/>
     <circle cx="250" cy="100" r="10" fill="none" stroke="#f4f1ea"/>
+  </svg>
+  <footer class="foot"><span>تا پایان ۱۴۰۶ جمعا ۱۰ شعبه</span><span>محرمانه برای مذاکره</span></footer>
+</section>
+<section class="slide navy" data-title="پیشنهاد سرمایه‌گذاری">
+  <h2>۳۰ میلیارد ۱۴۰۵ و ۳۰ میلیارد ۱۴۰۶، خرید ۲۵٪ سهام است نه قرض</h2>
+  <div class="grid g3">
+    <div class="card pick"><span class="tag">بهای سهام</span><div class="figure ask">۳۰</div><span class="unit">میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵. ۳۰ میلیارد دیگر در ۱۴۰۶ برای توسعه شعبه. این پول برنمی‌گردد.</span><span class="usd block" data-m="30000"></span></div>
+    <div class="card"><span class="tag">قیمت همین دور</span><div class="figure">۲۴۰</div><span class="unit">میلیارد تومان پس از ورود جمع ۶۰. پیش از پول ۱۸۰. سهم ۲۵٪ برابر جمع دو بخش است.</span><span class="usd block" data-m="240000"></span></div>
+    <div class="card"><span class="tag">اگر سودی باشد</span><div class="figure" id="incomeMonth">تقسیم</div><span class="unit" id="incomeUnit"></span></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h3>پول بابت چیست</h3><p id="investGap"></p></div>
+    <div class="card"><h3>بعد، داخل خود شرکت</h3><div class="figure" id="paybackMonth">—</div><span class="unit" id="paybackUnit"></span></div>
+  </div>
+  <footer class="foot"><span>خرید سهام است، نه بازپرداخت</span><span>پیشنهاد مذاکره</span></footer>
+</section>
+<section class="slide" data-title="پیوست منابع">
+  <h2>منابع و تاریخ بررسی: ۲۳ آبان ۱۴۰۵</h2>
+  <div class="sides single">
+    <section>
+      <ol>
+        <li><span><b>ناوگان</b>گزارش پایش شاخص‌های صنعت خودرو، مرکز پژوهش‌های مجلس، دوره ۱۳۹۵ تا ۱۴۰۳: شمار خودروهای سواری فعال «بیش از ۲۵ میلیون دستگاه برآورد می‌شود». این سرشماری رسمی ناوگان نیست. report.mrc.ir مقاله ۱۱۱۷۱.</span></li>
+        <li><span><b>شماره‌گذاری نو</b>مرکز آمار ایران، بازنشر ایران‌استاتیس، به‌روزرسانی ۸ شهریور ۱۴۰۴: در ۱۴۰۳ بیش از ۱٫۳ میلیون سواری شماره‌گذاری شده است. این تولید/شماره جدید است، نه معامله و نه موجودی در حال تردد.</span></li>
+        <li><span><b>تعویض پلاک</b>رئیس مرکز شماره‌گذاری راهور، ۲۸ مهر ۱۴۰۴، نقل تهران‌پرس: میانگین روزانه حدود ۳۰ هزار وسیله نقلیه شامل سبک، سنگین و موتور. تهران روزانه بیش از ۵٬۵۰۰ خودرو. این نقل همه وسایل نقلیه است.</span></li>
+        <li><span><b>سری قدیمی</b>سال ۱۳۹۷ حدود ۳٫۴۷۷ میلیون نقل‌وانتقال در مراکز تعویض پلاک، به نقل از رئیس وقت مرکز شماره‌گذاری. سری سالانه جدید با همین تعریف در این بررسی پیدا نشد.</span></li>
+        <li><span><b>اندازه بازار</b>۵ میلیون معامله سالانه خودرو از تعویض پلاک ناجا است. حدود ۲۵ میلیون سواری موجود است و همه معامله نمی‌شوند. تا ۱۴۰۳ فاصله تعویض حدود ۵ سال بوده و به‌تدریج به سمت هر ۳ سال می‌رود. برای حدود ۶۰٪ مردم دارایی اصلی اول خودرو است، نه ملک. شمار ناوگان پژوهشی، شماره‌گذاری نو، و تعویض پلاک روزانه همه وسایل، تعریف دیگری دارند و خودِ عدد ۵ میلیون نیستند.</span></li>
+      </ol>
+    </section>
+  </div>
+  <footer class="foot"><span>حجم سالانه رقبا در اسلاید بازار حدودی است و پیوست جدا ندارد</span><span>سیستم یکپارچه معاملات خودرو</span></footer>
+</section>
+</div>
+<div id="pstage">
+<section class="slide" data-title="نقشه ارائه">
+  <h2>از شناخت بازار تا شراکت در مالکیت</h2>
+  <p class="lead">این ارائه همان طرح جامع است: کسب‌وکار، راه عملیات، و پیشنهاد مشخص سرمایه‌گذاری.</p>
+  <div class="grid g4">
+    <div class="card"><span class="tag">بخش اول</span><h3>بنیان و پیشنهاد</h3><p>خلاصه، سهام، داستان رشد سرمایه‌گذار، تیم، دلیل تأسیس و فرهنگ سنجش‌پذیر.</p></div>
+    <div class="card"><span class="tag">بخش دوم</span><h3>بازار و راهکار</h3><p>مشکل معامله امروز، اندازه بازار، و محصول اصلی: فروش فوری با یک بار مراجعه.</p></div>
+    <div class="card"><span class="tag">بخش سوم</span><h3>محصول و عملیات</h3><p>نرم‌افزار، داده، درآمد هر معامله، شعبه، فرانچایز و سازمان.</p></div>
+    <div class="card"><span class="tag">بخش چهارم</span><h3>توسعه و شراکت</h3><p>نقشه راه، ساختار مالی، ارزش‌گذاری، حاکمیت، ریسک و دعوت به مشارکت.</p></div>
+  </div>
+  <footer class="foot"><span>جزئیات عددی مدل در پیوست مالی می‌آید؛ اینجا ساختار تصمیم است</span><span></span></footer>
+</section>
+<section class="slide" data-title="خلاصه مدیریتی">
+  <h2>یک شبکه فیزیکی و دیجیتال برای استاندارد کردن معامله</h2>
+  <p class="lead">زیرساخت شعبه، فناوری، و شبکه نمایشگاه‌داران در یک فرایند به هم وصل می‌شوند.</p>
+  <div class="grid g3">
+    <div class="card"><h3>چه چیزی مدیریت می‌شود</h3><p>از ورود فروشنده و پذیرش خودرو تا کارشناسی، بازاریابی، مزایده، مذاکره، عقد قرارداد، تسویه مالی و تحویل.</p></div>
+    <div class="card"><h3>دو نوع عرضه</h3><p>خدمت مستقیم به مردم، و عرضه موجودی نمایشگاه‌داران و دیلرهای سراسر کشور روی همان پلتفرم.</p></div>
+    <div class="card"><h3>نوع این پیشنهاد</h3><p>دعوت به مالکیت و ساخت آینده کسب‌وکار است. درخواست پول بدون سهم و بدون حضور در تصمیم‌گیری نیست.</p></div>
+  </div>
+  <footer class="foot"><span>فصل ۱ · خلاصه مدیریتی</span><span></span></footer>
+</section>
+<section class="slide" data-title="ضرورت تأسیس">
+  <h2>معامله خودرو در ایران هنوز یک فرایند واحد ندارد</h2>
+  <div class="grid g2">
+    <div class="card"><h3>آنچه از نزدیک دیده شده</h3><ul>
+      <li>خریدار و فروشنده با مسیر نامشخص و واسطه‌های متعدد روبه‌رو هستند</li>
+      <li>خدمات کارشناسی، بازاریابی، قرارداد و تسویه پراکنده است</li>
+      <li>نمایشگاه‌داران به موجودی یکدیگر دسترسی یکپارچه ندارند</li>
+    </ul></div>
+    <div class="card"><h3>چرا مدل ترکیبی</h3><ul>
+      <li>فناوری به‌تنهایی جای کارشناسی، قرارداد و تحویل را نمی‌گیرد</li>
+      <li>شعبه فیزیکی بدون شبکه دیلر، دامنه معامله را محدود می‌کند</li>
+      <li>شعبه و پلتفرم با هم، مسیر را از پذیرش تا تحویل استاندارد می‌کنند</li>
+    </ul></div>
+  </div>
+  <p class="note">ایده از تجربه میدانی تیم مؤسس آمده است: مشکل روزمره معامله، و ظرفیت فناوری برای منظم کردن آن.</p>
+  <footer class="foot"><span>فصل ۴ · داستان شکل‌گیری ایده</span><span></span></footer>
+</section>
+<section class="slide" data-title="مأموریت و چشم‌انداز">
+  <h2>معامله‌ای که مردم به آن اعتماد کنند و شبکه بتواند آن را تکرار کند</h2>
+  <div class="grid g2">
+    <div class="card"><span class="tag">مأموریت</span><h3>یک بستر امن، سریع، شفاف و منصفانه</h3><p>خریداران، فروشندگان و فعالان حرفه‌ای بازار بتوانند معامله را در فرایندی استاندارد و قابل اعتماد، با سهولت و اطمینان بیشتر انجام دهند.</p></div>
+    <div class="card"><span class="tag">چشم‌انداز</span><h3>یکی از شبکه‌های معتبر معاملات خودرو در ایران</h3><p>فناوری قابل اتکا، شعب استاندارد، دسترسی گسترده نمایشگاه‌داران و دیلرها، و توان مدیریت هزاران معامله موفق در ماه.</p></div>
+  </div>
+  <footer class="foot"><span>چشم‌انداز جهت است؛ ظرفیت عددی شبکه در اسلاید افق توسعه، سناریوی مشروط است</span><span></span></footer>
+</section>
+<section class="slide" data-title="ارزش‌های معامله">
+  <h2>شش تعهدی که مدل عملیات باید به آن‌ها وفادار بماند</h2>
+  <div class="grid g3 dense">
+    <div class="card"><h3>معامله سریع</h3><p>یک مراجعه برای پذیرش و کارشناسی، و در صورت توافق، امکان پایان فروش در همان روز. شاخص: زمان پذیرش، کارشناسی، اولین پیشنهاد، و سهم معامله همان‌روز.</p></div>
+    <div class="card"><h3>معامله امن</h3><p>احراز هویت، بررسی مدارک و وضعیت حقوقی، قرارداد استاندارد، کنترل پرداخت و تسویه، و رعایت انتقال مالکیت.</p></div>
+    <div class="card"><h3>معامله راحت</h3><p>فروشنده خودرو را عرضه می‌کند، پیشنهاد می‌گیرد، وجه را از مسیر مشخص دریافت و تسویه را تأیید می‌کند، بعد خودرو تحویل می‌شود.</p></div>
+    <div class="card"><h3>شفاف و قابل اعتماد</h3><p>کارشناسی بدنه و فنی، تصویر واقعی، وضعیت رنگ و فنی، سابقه پیشنهاد، و امکان پیگیری مرحله معامله.</p></div>
+    <div class="card"><h3>قیمت منصفانه</h3><p>قیمت روز، خودروی مشابه، وضعیت، کارکرد و پیشنهاد دیلرها. فروشنده پیشنهاد را قبول یا رد می‌کند. سرعت بهانه فروش ارزان نیست.</p></div>
+    <div class="card"><h3>شبکه دیلرها</h3><p>ثبت‌نام و احراز هویت، ثبت موجودی نمایشگاه، مشاهده در شبکه، پیشنهاد قیمت و همکاری بین دیلرها.</p></div>
+  </div>
+  <footer class="foot"><span>فروش سریع نباید به معنای فروش زیر ارزش منصفانه باشد</span><span></span></footer>
+</section>
+<section class="slide" data-title="فرهنگ و OKR">
+  <h2>فرهنگ سازمان با شاخص سنجیده می‌شود، نه با شعار</h2>
+  <div class="grid g2">
+    <div class="card"><h3>ارزش سازمانی</h3><p>احترام به مشتری و همکار، پاسخ‌گویی، مسئولیت‌پذیری، سرعت و دقت، شفافیت، صداقت، تصمیم مبتنی بر داده، بهبود مستمر، توسعه پایدار و سودآوری مسئولانه.</p></div>
+    <div class="card"><h3>رفتار قابل اندازه‌گیری</h3><p>بهبود روزانه، سنجش فرد و واحد، اصلاح خطا، ثبت بازخورد مشتری، گزارش شفاف، مسئولیت نتیجه، و همکاری بین واحدها. از مدیرعامل تا نیروی اجرایی.</p></div>
+  </div>
+  <div class="card"><h3>OKR در چهار لایه</h3><p>هدف کلان سازمان، واحد، مدیر و کارمند. بازبینی هفتگی و ماهانه، به‌اضافه جلسه کوتاه روزانه برای رفع مانع. نمونه نتیجه: زمان فروش، نرخ تبدیل، رضایت، خطای کارشناسی و قرارداد، دیلر فعال، معامله هر شعبه، هزینه جذب و سود شعبه.</p></div>
+  <footer class="foot"><span>فصل ۵ · فرهنگ و مدیریت هدف</span><span></span></footer>
+</section>
+<section class="slide" data-title="مشکلات بازار">
+  <h2>مشکل بازار، تصویر وارونه همان ارزش‌هایی است که شرکت می‌سازد</h2>
+  <div class="grid g4 dense">
+    <div class="card"><h3>ناامن</h3><p>نگرانی حقوقی، مدارک، اختلاف پرداخت و نبود قرارداد کنترل‌شده.</p></div>
+    <div class="card"><h3>کند</h3><p>مراجعه مکرر، تماس پراکنده و مذاکره بدون نتیجه قطعی.</p></div>
+    <div class="card"><h3>غیرشفاف</h3><p>اطلاعات ناقص، کارشناسی ناهمخوان و دشواری مقایسه پیشنهاد.</p></div>
+    <div class="card"><h3>فروش سخت</h3><p>وابستگی به واسطه، هماهنگی بازدید، و پیچیدگی پرداخت و انتقال.</p></div>
+    <div class="card"><h3>قیمت نامطمئن</h3><p>فاصله زیاد پیشنهادها و ترس از فروش پایین‌تر از ارزش واقعی.</p></div>
+    <div class="card"><h3>دیلر پراکنده</h3><p>فعالیت جزیره‌ای و نبود بستر مشترک برای موجودی و همکاری.</p></div>
+    <div class="card"><h3>بدون استاندارد</h3><p>روش‌های متفاوت، نبود سیستم واحد مشتری و داده متمرکز تصمیم.</p></div>
+    <div class="card"><h3>مدل سنتی</h3><p>دشواری توسعه شعبه، وابستگی به فرد، ضعف کیفیت و نبود گزارش لحظه‌ای.</p></div>
+  </div>
+  <footer class="foot"><span>فصل ۶ · تحلیل مشکلات بازار</span><span></span></footer>
+</section>
+<section class="slide" data-title="اندازه بازار و رقبا">
+  <h2>بخش بزرگ بازار هنوز خارج از مدل‌های سازمان‌یافته است</h2>
+  <div class="grid g3">
+    <div class="card"><span class="tag">تعویض پلاک ناجا</span><div class="figure">۵ میلیون</div><span class="unit">معامله سالانه خودرو. ناوگان حدود ۲۵ میلیون سواری است و همه معامله نمی‌شوند</span></div>
+    <div class="card"><span class="tag">سایر بازیگران</span><div class="figure">۲٪</div><span class="unit">همراه مکانیک و مجموعه‌های مشابه، روی هم. سود تسهیلات کارنامه جداست</span></div>
+    <div class="card pick"><span class="tag">خارج از پوشش مؤثر</span><div class="figure">۹۵٪+</div><span class="unit">هنوز با روش سنتی و پراکنده معامله می‌شود</span></div>
+  </div>
+  <p class="note">تا ۱۴۰۳ مشتریان حدود هر ۵ سال خودرو را عوض می‌کردند و این فاصله به‌تدریج به سمت هر ۳ سال می‌رود، چون خودرو در ایران ماهیت سرمایه‌گذاری دارد. برای حدود ۶۰٪ مردم، دارایی اصلی اول خودرو است، نه ملک. سود معامله معمولاً ۲ تا ۴ درصد قیمت است؛ خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان. سود تسهیلات با سود معامله یکی نیست.</p>
+  <footer class="foot"><span>فصل ۷ · اندازه بازار فرصت است، نه سهم تضمین‌شده</span><span></span></footer>
+</section>
+<section class="slide" data-title="فرصت و تمایز">
+  <h2>هدف، منظم کردن بخشی از بازار است که هنوز استاندارد ندارد</h2>
+  <div class="sides steps">
+    <section>
+      <h3>برای دو طرف معامله</h3>
+      <ol>
+        <li>تمرکز بر قیمت منصفانه فروشنده و اختیار رد پیشنهاد</li>
+        <li>مزایده و پیشنهاد رقابتی از شبکه دیلرها</li>
+        <li>عرضه عمومی اگر قیمت مزایده کافی نباشد</li>
+        <li>فروش امانی، با باقی ماندن مالکیت تا زمان فروش</li>
+      </ol>
+    </section>
+    <section>
+      <h3>برای شبکه</h3>
+      <ol>
+        <li>یک پلتفرم برای مردم و نمایشگاه‌داران</li>
+        <li>اتصال شعبه فیزیکی به زیرساخت دیجیتال</li>
+        <li>داده و عملکرد در سطح کل شبکه</li>
+        <li>رقابت بر سر سازمان‌دهی بازار، نه فقط سهم فعلی بازیگران</li>
+      </ol>
+    </section>
+  </div>
+  <p class="note">محصول اصلی این تمایز است: فروشنده برای فروش فوری فقط یک بار به شعبه می‌آید. چرخه کامل در اسلاید محصول اصلی است.</p>
+  <footer class="foot"><span>فصل ۷ · جایگاه رقابتی پیشنهادی</span><span></span></footer>
+</section>
+<section class="slide" data-title="اکوسیستم راهکار">
+  <h2>ده جزء که باید در یک سیستم به هم وصل باشند</h2>
+  <div class="leads">
+    <span>دفتر مرکزی و مدیریت متمرکز</span>
+    <span>شعب تحت مالکیت شرکت</span>
+    <span>شعب فرانچایز</span>
+    <span>پلتفرم دیجیتال معاملات</span>
+    <span>اپلیکیشن و پنل دیلرها</span>
+    <span>واحد کارشناسی خودرو</span>
+    <span>بازاریابی و فروش</span>
+    <span>شبکه نمایشگاه‌دار و خریدار حرفه‌ای</span>
+    <span>مدیریت مشتری و معامله</span>
+    <span>تحلیل داده و گزارش مدیریتی</span>
+  </div>
+  <p class="lead">اطلاعات و عملکرد هر بخش در سیستم متمرکز دیده می‌شود. پلتفرم فقط ویترین خودروهای شعبه نیست؛ شبکه معاملاتی مشترک فعالان بازار است.</p>
+  <footer class="foot"><span>فصل ۸ · معرفی راهکار و مدل کسب‌وکار</span><span></span></footer>
+</section>
+<section class="slide" data-title="محصول اصلی">
+  <p class="kicker">محصول اصلی کسب‌وکار</p>
+  <h2>فروش فوری خودرو، با یک بار مراجعه فروشنده به شعبه</h2>
+  <ol class="flow">
+    <li><span class="n">۱</span><b>پذیرش خودرو</b><span>فروشنده یک بار به شعبه می‌آید و درخواست فروش را ثبت می‌کند.</span></li>
+    <li><span class="n">۲</span><b>کارشناسی و پرونده</b><span>کارشناسی، تصویر، مشخصات و تشکیل پرونده دیجیتال.</span></li>
+    <li><span class="n">۳</span><b>شبکه دیلرها</b><span>خودرو در اپ دیلرها منتشر می‌شود و مزایده زنده شروع می‌شود.</span></li>
+    <li class="current"><span class="n">۴</span><b>فروش فوری</b><span>بالاترین پیشنهاد به فروشنده داده می‌شود. با توافق، معامله انجام می‌شود.</span></li>
+  </ol>
+  <p class="flow-note">اگر فروشنده قیمت بالاتری بخواهد، همان پرونده بدون مراجعه دوباره ادامه پیدا می‌کند.</p>
+  <ol class="flow next">
+    <li><span class="n">۵</span><b>طرح سه‌روزه</b><span>خودرو برای قیمت بالاتر به مرحله بعد می‌رود.</span></li>
+    <li><span class="n">۶</span><b>امانی و عرضه عمومی</b><span>با رضایت مالک، در شبکه، وب‌سایت و کانال‌های فروش عرضه می‌شود.</span></li>
+    <li><span class="n">۷</span><b>تسویه و تحویل</b><span>کنترل اسناد، قرارداد، تسویه و تحویل، با فرایند قابل پیگیری.</span></li>
+  </ol>
+  <div class="grid g3 dense">
+    <div class="card"><h3>زمان معامله</h3><p>بعد از همان یک مراجعه، ادامه کار روی پرونده دیجیتال و اپ دیلرهاست. فروشنده برای هر پیشنهاد تازه دوباره به شعبه برنمی‌گردد.</p></div>
+    <div class="card"><h3>هزینه عملیات</h3><p>کارشناسی، تصویر و پرونده یک بار ساخته می‌شود و در مزایده، طرح سه‌روزه و عرضه بعدی دوباره انجام نمی‌شود.</p></div>
+    <div class="card"><h3>تعداد معامله</h3><p>اگر مزایده به توافق نرسد، همان خودرو بدون مراجعه جدید در مسیر می‌ماند و شعبه می‌تواند خودروی بعدی را بپذیرد.</p></div>
+  </div>
+  <footer class="foot"><span>تصمیم فروش با فروشنده است</span><span>این منطق طراحی است، نه زمان اندازه‌گیری‌شده</span></footer>
+</section>
+<section class="slide" data-title="مسیر مزایده">
+  <h2>جزئیات مسیر اصلی: پذیرش، کارشناسی، مزایده، و تصمیم آزاد فروشنده</h2>
+  <div class="sides single steps">
+    <section>
+      <ol>
+        <li>ورود فروشنده، ثبت مشخصات مالک و خودرو، مدارک، هدف فروش و قیمت مورد انتظار</li>
+        <li>تشکیل پرونده دیجیتال؛ مدارک، تصویر و اقدام‌های بعدی در همان پرونده</li>
+        <li>کارشناسی بدنه و فنی، تجهیزات، عکاسی استاندارد و اتصال گزارش به پرونده</li>
+        <li>انتشار در اپ فروش برای دیلرهای احراز هویت‌شده</li>
+        <li>ثبت پیشنهاد، امکان افزایش قیمت و نگهداری سابقه مزایده</li>
+        <li>فروشنده یکی را می‌پذیرد، رد می‌کند، مذاکره می‌کند یا منصرف می‌شود</li>
+        <li>قرارداد استاندارد، پرداخت از مسیر بانکی کنترل‌شده، تأیید تسویه و تحویل</li>
+        <li>ثبت معامله موفق، کمیسیون، به‌روزرسانی شاخص و نگهداری سابقه برای تحلیل</li>
+      </ol>
+    </section>
+  </div>
+  <p class="note">هیچ اجباری برای پذیرش پایین‌ترین یا بالاترین پیشنهاد وجود ندارد. تصمیم نهایی فروش با رضایت فروشنده است.</p>
+  <footer class="foot"><span>فصل ۹ · مسیر اول</span><span></span></footer>
+</section>
+<section class="slide" data-title="چهار مسیر دیگر">
+  <h2>اگر مزایده به قیمت موردنظر نرسد، معامله تمام نمی‌شود</h2>
+  <div class="grid g2 dense">
+    <div class="card"><span class="tag">مسیر دوم</span><h3>عرضه عمومی</h3><p>با رضایت فروشنده، خودرو به قیمت درخواستی یا توافق‌شده در وب‌سایت و اپ منتشر می‌شود. کارشناسی و تصویر واقعی در دسترس است، بازدید ثبت می‌شود و پس از توافق، قرارداد و تسویه انجام می‌شود.</p></div>
+    <div class="card"><span class="tag">مسیر سوم</span><h3>فروش امانی</h3><p>خودرو با قرارداد امانت در شعبه می‌ماند. مالکیت تا فروش برای فروشنده است. قیمت، نگهداری، بیمه، هزینه و شرایط تحویل در قرارداد مشخص می‌شود.</p></div>
+    <div class="card"><span class="tag">مسیر چهارم</span><h3>موجودی نمایشگاه‌دار</h3><p>دیلر احراز هویت می‌شود، موجودی و تصویر را در پنل ثبت می‌کند، و سایر دیلرها و خریداران مجاز پیشنهاد می‌دهند. معامله از فرایند استاندارد پلتفرم پیگیری می‌شود.</p></div>
+    <div class="card"><span class="tag">مسیر پنجم</span><h3>موجودی شرکت</h3><p>فقط با سیاست مصوب و سرمایه جدا از سرمایه عملیاتی: سقف سرمایه، قاعده خرید، کنترل ریسک موجودی، هزینه خواب سرمایه، و سود و زیان هر خودرو.</p></div>
+  </div>
+  <footer class="foot"><span>فصل ۹ · مسیرهای دوم تا پنجم</span><span></span></footer>
+</section>
+<section class="slide" data-title="محصولات دیجیتال">
+  <h2>چهار محصول، یک پرونده برای هر خودرو</h2>
+  <div class="grid g4 dense">
+    <div class="card"><h3>وب‌سایت</h3><p>معرفی خدمت، نمایش و جست‌وجوی خودرو، اطلاعات کارشناسی، درخواست خرید و فروش، و ارتباط با شعب.</p></div>
+    <div class="card"><h3>اپ فروش</h3><p>موجودی، خودروهای پذیرش‌شده، پیشنهاد، مدیریت مزایده، پیگیری معامله و دسترسی کاربران مجاز.</p></div>
+    <div class="card"><h3>اپ کارشناسی</h3><p>مشخصات، چک‌لیست، وضعیت فنی و بدنه، تصویر و مستند، و گزارش استاندارد متصل به پرونده.</p></div>
+    <div class="card"><h3>بک‌آفیس</h3><p>مشتری، خودرو، پرونده، کارشناسی، مزایده، قرارداد، پرداخت، شعبه، دسترسی، دیلر و گزارش.</p></div>
+  </div>
+  <p class="note">بک‌آفیس، اپ کارشناسی و اپ فروش در حال توسعه‌اند. نسخه قابل نمایش اکنون وجود ندارد و رونمایی در آذر ۱۴۰۵ است. بک‌آفیس منبع ثبت عملیات طراحی شده، نه سامانه آماده.</p>
+  <footer class="foot"><span>فصل ۱۰ · محصولات دیجیتال</span><span></span></footer>
+</section>
+<section class="slide" data-title="داده و هوش تجاری">
+  <h2>از روز اول، داده قابل اتکا و گزارش مدیریتی لازم است</h2>
+  <div class="grid g4 dense">
+    <div class="card"><h3>پایگاه داده</h3><p>داده مرکزی مشتری، معامله، خودرو و کارشناسی، کنترل دسترسی، سابقه تغییر، پشتیبان و بازیابی.</p></div>
+    <div class="card"><h3>سرور و امنیت</h3><p>زیرساخت قابل توسعه، پایش دسترس‌پذیری، حفاظت از اطلاعات، رخداد امنیتی و تداوم فعالیت.</p></div>
+    <div class="card"><h3>Metabase</h3><p>گزارش عملیات، عملکرد شعبه و کارشناس، وضعیت معامله، قیف فروش و شاخص روزانه.</p></div>
+    <div class="card"><h3>Power BI</h3><p>داشبورد مدیریت ارشد، سودآوری، روند درآمد و هزینه، پیش‌بینی و رفتار مشتری.</p></div>
+  </div>
+  <p class="note">Metabase و Power BI لایه تحلیل‌اند. ثبت حقیقت عملیات در بک‌آفیس می‌ماند.</p>
+  <footer class="foot"><span>فصل ۱۱ · زیرساخت داده</span><span></span></footer>
+</section>
+<section class="slide" data-title="مدل درآمد">
+  <h2>درآمد شرکت با ارزش خودروهای معامله‌شده یکی نیست</h2>
+  <div class="leads">
+    <span>کمیسیون معامله مستقیم</span>
+    <span>کارمزد شبکه دیلرها</span>
+    <span>فروش امانی</span>
+    <span>کارمزد کارشناسی</span>
+    <span>خدمات فرانچایز</span>
+    <span>خدمات جانبی مصوب</span>
+    <span>موجودی شرکت، اگر آن مدل اجرا شود</span>
+  </div>
+  <div class="grid g2 dense">
+    <div class="card"><h3>برای هر مسیر حساب می‌شود</h3><p>درآمد متوسط معامله، هزینه مستقیم، هزینه جذب، حاشیه، سهم شعبه و دفتر مرکزی، سهم همکار یا دیلر، و سود عملیاتی واقعی.</p></div>
+    <div class="card"><h3>GMV جدا می‌ماند</h3><p>ارزش کل خودروهای معامله‌شده شاخص حجم بازار داخلی شبکه است. درآمد شرکت فقط کارمزد، کمیسیون و خدمت متعلق به خود شرکت است.</p></div>
+  </div>
+  <p class="note">کمیسیون از خریدار است و فروشنده کمیسیون نمی‌دهد. پیش‌فرض مدل ۶۰ میلیون تومان است. محافظه‌کارانه ۵۰ میلیون و بالاتر ۱۰۰ میلیون.</p>
+  <footer class="foot"><span>فصل ۱۲ · مدل درآمدی و اقتصاد هر معامله</span><span></span></footer>
+</section>
+<section class="slide" data-title="شعب و فرانچایز">
+  <h2>شعبه ملکی و فرانچایز، هر دو با استاندارد و بک‌آفیس واحد</h2>
+  <div class="grid g3 dense">
+    <div class="card"><h3>انواع حضور</h3><p>شعبه مرکزی، شعب تحت مالکیت شرکت، و شعب فرانچایز. طراحی، تجهیز، کارشناسی، نیروی انسانی و کیفیت استاندارد است.</p></div>
+    <div class="card"><h3>کنترل</h3><p>نظارت و کنترل کیفیت مرکزی، و اتصال کامل هر شعبه به بک‌آفیس تا عملکرد قابل مقایسه باشد.</p></div>
+    <div class="card pick"><h3>تقسیم اولیه فرانچایز</h3><p>تصمیم اولیه: ۵۰/۵۰ بین شرکت مرکزی و شریک فرانچایز. قرارداد نهایی باید مبنای درآمد قابل تقسیم، هزینه مستقیم و عملیاتی، مالیات، مسئولیت و زمان تسویه را دقیق کند.</p></div>
+  </div>
+  <footer class="foot"><span>فصل ۱۳ · ۵۰/۵۰ تصمیم اولیه است، نه متن نهایی قرارداد</span><span></span></footer>
+</section>
+<section class="slide" data-title="سازمان و ارزیابی">
+  <h2>نقش‌ها مشخص‌اند و عملکردشان سنجیده می‌شود</h2>
+  <div class="leads">
+    <span>مدیرعامل</span><span>معاون اجرایی</span><span>مدیر فناوری</span><span>مالی و اداری</span>
+    <span>بازاریابی</span><span>عملیات شعب</span><span>کارشناسی</span><span>فروش و شبکه دیلرها</span>
+    <span>کارشناس خودرو</span><span>کارشناس فروش</span><span>پذیرش و پشتیبانی</span>
+  </div>
+  <div class="grid g2 dense">
+    <div class="card"><h3>حقوق مدیران مؤسس</h3><p>بابت مسئولیت اجرایی حقوق می‌گیرند. این رقم در بودجه عملیاتی است و از سود سهام جدا می‌شود.</p></div>
+    <div class="card"><h3>ارزیابی</h3><p>شاخص فرد، واحد و شعبه، رضایت مشتری، تحقق OKR و بهبود مستمر.</p></div>
+  </div>
+  <footer class="foot"><span>فصل ۱۴ · ساختار سازمانی و منابع انسانی</span><span></span></footer>
+</section>
+<section class="slide" data-title="بازاریابی">
+  <h2>جذب فروشنده، خریدار و دیلر با قیف قابل اندازه‌گیری</h2>
+  <div class="sides steps">
+    <section>
+      <h3>بازار و کانال</h3>
+      <ol>
+        <li>فروشنده، خریدار، نمایشگاه‌دار، دیلر حرفه‌ای و متقاضی فروش امانی</li>
+        <li>اینستاگرام و شبکه اجتماعی، وب‌سایت و تبلیغات دیجیتال</li>
+        <li>بازاریابی محلی شعبه، محتوا، معرفی مشتری و همکاری با نمایشگاه‌دار</li>
+        <li>کمپین فروش فوری و کارشناسی</li>
+      </ol>
+    </section>
+    <section>
+      <h3>شاخص</h3>
+      <ol>
+        <li>سرنخ، هزینه جذب مشتری و هزینه جذب هر دیلر</li>
+        <li>تبدیل سرنخ به مراجعه، مراجعه به کارشناسی، کارشناسی به معامله</li>
+        <li>تعداد دیلر فعال</li>
+        <li>نرخ بازگشت مشتری</li>
+      </ol>
+    </section>
+  </div>
+  <footer class="foot"><span>فصل ۱۵ · برنامه بازاریابی</span><span></span></footer>
+</section>
+<section class="slide" data-title="نقشه راه">
+  <h2>اول مدل در شعبه اول ثابت می‌شود، بعد شبکه بزرگ می‌شود</h2>
+  <div class="grid g4 dense">
+    <div class="card"><span class="tag">تا پایان ۱۴۰۵</span><h3>شروع</h3><p>ثبت شرکت، دفتر مرکزی، شعبه اول مجهز، نرم‌افزار، شروع همکاری با دیلرها، و افتتاح شعبه فرانچایز. سرمایه این راه‌اندازی ۳۰ میلیارد تومان است. محل شعبه فرانچایز هنوز مشخص نشده است.</p></div>
+    <div class="card"><span class="tag">پایان ۱۴۰۶</span><h3>۱۰ شعبه</h3><p>جمعا ۱۰ شعبه: ۷ شعبه تحت مالکیت شرکت و ۳ شعبه فرانچایز. سرمایه این توسعه ۳۰ میلیارد تومان است.</p></div>
+    <div class="card"><span class="tag">از ۱۴۰۷</span><h3>درآمد سیستم</h3><p>هر شعبه‌ای که بعد از ۱۴۰۶ باز شود از درآمد سیستم توسعه داده می‌شود. مسیر سال چهارم همچنان ۲۰ شعبه ملکی و ۱۰ فرانچایز است.</p></div>
+    <div class="card"><span class="tag">پایان سال پنجم</span><h3>تصمیم هیئت‌مدیره</h3><p>تثبیت عملیات، سودآوری شعب، سهم بازار، کیفیت، توان مدیریت و منابع مرحله بعد.</p></div>
+  </div>
+  <div class="card"><h3>افق مشروط سال هفتم: تا ۶۰ شعبه، فقط اگر عملکرد و منابع تأیید شود</h3><p>در سناریوی آرمانی، حدود ۶۷ معامله موفق در ماه برای هر شعبه یعنی حدود ۴٬۰۰۰ معامله در ماه و ۴۸ هزار در سال؛ نزدیک ۰٫۹۶ درصد از بازار پنج‌میلیونی. این سناریوی توسعه مشروط است، نه تضمین و نه هدف قطعی پنج‌ساله.</p></div>
+  <footer class="foot"><span>فصل ۱۶ · نقشه راه پنج‌ساله و چشم‌انداز هفت‌ساله</span><span></span></footer>
+</section>
+<section class="slide" data-title="ساختار پیش‌بینی مالی">
+  <h2>مدل پنج‌ساله سه سناریو دارد؛ جدول عددی پیوست مالی است</h2>
+  <div class="grid g3">
+    <div class="card"><h3>محافظه‌کارانه</h3><p>کف برنامه‌ریزی نقدینگی و زمان رسیدن به سربه‌سر.</p></div>
+    <div class="card pick"><h3>واقع‌بینانه</h3><p>مبنایی که بودجه توسعه شعب بعدی با آن سنجیده می‌شود.</p></div>
+    <div class="card"><h3>خوش‌بینانه</h3><p>سقف ظرفیت، نه تعهد عملکرد.</p></div>
+  </div>
+  <div class="card"><h3>آنچه مدل باید نشان دهد</h3><p>تعداد معامله و درآمد هر مسیر، درآمد شعبه ملکی و فرانچایز، هزینه ثابت و متغیر، حقوق، بازاریابی، فناوری، سود ناخالص، EBITDA، سود خالص، جریان نقدی و نیاز سرمایه توسعه. نقطه سربه‌سر شعبه اول، دفتر مرکزی و کل شرکت، درآمد و سود هر معامله، هزینه جذب، نرخ تبدیل، بازگشت سرمایه عملیاتی و بازده در هر سناریو.</p></div>
+  <footer class="foot"><span>فصل ۱۸ و ۱۹ · عددها تا تکمیل مدل مالی در پروپوزال قطعی اعلام نمی‌شوند</span><span></span></footer>
+</section>
+<section class="slide" data-title="حاکمیت شرکتی">
+  <h2>رابطه بنیان‌گذاران و سرمایه‌گذار پیش از شروع نوشته می‌شود</h2>
+  <div class="split">
+    <ul>
+      <li>عضویت، کرسی اختصاصی و حق رأی در هیئت‌مدیره</li>
+      <li>حقوق امضا و جایگاه اختصاصی سرمایه‌گذار</li>
+      <li>نحوه انتخاب و عزل مدیران</li>
+      <li>حدود اختیار مدیرعامل</li>
+      <li>تصمیم‌هایی که تصویب هیئت‌مدیره می‌خواهند</li>
+      <li>دسترسی به اطلاعات و گزارش مالی</li>
+      <li>سیاست تقسیم سود</li>
+      <li>حقوق مدیران مؤسس، جدا از سود سهام</li>
+    </ul>
+    <ul>
+      <li>افزایش سرمایه و رقیق شدن سهام</li>
+      <li>محدودیت انتقال سهام</li>
+      <li>مالکیت نرم‌افزار و دارایی فکری</li>
+      <li>محرمانگی</li>
+      <li>تعارض منافع</li>
+      <li>شرایط خروج و انتقال سهام</li>
+      <li>سازوکار حل اختلاف</li>
+      <li>ثبت این موارد در توافق‌نامه سهام‌داران</li>
+    </ul>
+  </div>
+  <footer class="foot"><span>فصل ۲۲ · حاکمیت، حقوق سرمایه‌گذار و سهام‌داران</span><span></span></footer>
+</section>
+<section class="slide" data-title="ریسک‌ها">
+  <h2>هر ریسک صاحب، احتمال، اثر و برنامه مقابله خواهد داشت</h2>
+  <div class="split">
+    <ul>
+      <li>نقدینگی</li>
+      <li>بازار و رقابت</li>
+      <li>قیمت‌گذاری خودرو</li>
+      <li>حقوقی بودن معاملات</li>
+      <li>کارشناسی</li>
+    </ul>
+    <ul>
+      <li>پرداخت و تسویه</li>
+      <li>نگهداری خودروهای امانی</li>
+      <li>فناوری و امنیت اطلاعات</li>
+      <li>کیفیت خدمات شعب</li>
+      <li>توسعه سریع و کنترل‌نشده</li>
+    </ul>
+  </div>
+  <p class="note">فهرست این اسلاید برنامه مدیریت ریسک است. جدول احتمال، اثر، مسئول کنترل و اقدام مقابله در پیوست تکمیل می‌شود.</p>
+  <footer class="foot"><span>فصل ۲۳ · مدیریت ریسک و کنترل داخلی</span><span></span></footer>
+</section>
+<section class="slide" data-title="پیوست‌ها و خروجی‌ها">
+  <h2>آنچه همراه این ارائه باید به سرمایه‌گذار برسد</h2>
+  <div class="split">
+    <ul>
+      <li>رزومه تیم و چارت وظایف</li>
+      <li>گردش عملیات و تجربه مشتری</li>
+      <li>معماری نرم‌افزار و نمونه داشبورد</li>
+      <li>زمان‌بندی راه‌اندازی مرحله اول</li>
+      <li>جدول تفصیلی مصرف ۳۰ میلیارد راه‌اندازی و ۳۰ میلیارد توسعه شعبه</li>
+      <li>مدل مالی پنج‌ساله و اقتصاد هر معامله</li>
+      <li>اقتصاد شعبه ملکی و فرانچایز</li>
+      <li>تحقیق بازار، اندازه بازار و تحلیل رقبا</li>
+      <li>قرارداد فروش، امانی و چارچوب فرانچایز</li>
+      <li>توافق سهام‌داران، هیئت‌مدیره و برنامه ریسک</li>
+    </ul>
+    <ul>
+      <li>شاخص عملکرد و نظام OKR</li>
+      <li>سناریوهای بازده سرمایه‌گذار و شرایط خروج</li>
+      <li>سند جامع پروپوزال سرمایه‌گذاری</li>
+      <li>همین فایل ارائه برای جلسه سرمایه‌گذار</li>
+      <li>مدل مالی قابل ویرایش</li>
+      <li>برنامه اجرایی و زمان‌بندی راه‌اندازی</li>
+      <li>نقشه معماری سیستم و گردش عملیات</li>
+      <li>پیوست مالی، حقوقی، فنی و تحقیق بازار</li>
+    </ul>
+  </div>
+  <footer class="foot"><span>پیوست‌ها و خروجی‌های نهایی پروژه</span><span></span></footer>
+</section>
+<section class="slide navy" data-title="دعوت به مشارکت">
+  <div class="kicker">پیشنهاد نهایی</div>
+  <h1>شریک مالکیت و تصمیم، نه فقط تأمین‌کننده پول</h1>
+  <p class="lead">تیم مؤسس برای راه‌اندازی کامل شرکت در ۱۴۰۵، ۳۰ میلیارد تومان و برای توسعه شعبه در ۱۴۰۶، ۳۰ میلیارد تومان دیگر پیشنهاد می‌کند. تا پایان ۱۴۰۶ جمع شعب ۱۰ است و از ۱۴۰۷ شعبه جدید از درآمد سیستم توسعه داده می‌شود. در برابر این سرمایه، ۲۵ درصد سهام، کرسی هیئت‌مدیره، حق رأی و حقوق امضای مجاز به سرمایه‌گذار می‌رسد.</p>
+  <div class="grid g3">
+    <div class="card"><h3>چه چیزی ساخته می‌شود</h3><p>ترکیب تجربه عملیاتی، فناوری، شبکه شعب، شبکه دیلرها و فرهنگ داده‌محور.</p></div>
+    <div class="card"><h3>معامله چگونه باید شود</h3><p>استانداردتر، سریع‌تر، امن‌تر و منصفانه‌تر از وضع امروز بازار.</p></div>
+    <div class="card pick"><h3>دعوت</h3><p>مشارکت در مالکیت، نظارت، تصمیم‌گیری و توسعه یک کسب‌وکار بلندمدت.</p></div>
+  </div>
+  <footer class="foot"><span>فصل ۲۴ · پیشنهاد نهایی مشارکت و سرمایه‌گذاری</span><span>سیستم یکپارچه معاملات خودرو</span></footer>
+</section>
+</div>
+
+<!-- FROZEN backup-20261120. Do not edit stageBackup or pstageBackup. -->
+<div id="stageBackup">
+<section class="slide navy active" data-title="کاور">
+  <div class="kicker">طرح سرمایه‌گذاری خصوصی</div>
+  <h1>سیستم یکپارچه معاملات خودرو</h1>
+  <p class="lead">طرح سرمایه‌گذاری و توسعه شبکه خرید و فروش خودرو</p>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><span class="tag">پیشنهاد مذاکره</span><div class="figure ask">۳۰</div><span class="unit">میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵. ۳۰ میلیارد دیگر در ۱۴۰۶ برای توسعه شعبه، در برابر ۲۵٪</span><span class="usd block" data-m="30000">۱۱۱٬۱۱۱ دلار</span></div>
+    <div class="card"><span class="tag">هدف پایان ۱۴۰۵</span><div class="figure">۲</div><span class="unit">یک دفتر مرکزی و یک فرانچایز</span></div>
+    <div class="card"><span class="tag">وضعیت</span><div class="figure" style="font-size:20px;color:var(--text)">پیش از درآمد</div><span class="unit">شرکت هنوز ثبت نشده و معامله تحقق‌یافته اعلام نشده است</span></div>
+  </div>
+  <svg class="cover-art" viewBox="0 0 340 150" aria-hidden="true">
+    <path d="M20 110 H320" stroke="#087F78" stroke-opacity=".35"></path>
+    <path d="M40 110 V40 M80 110 V55 M120 110 V30 M160 110 V48 M200 110 V36 M240 110 V60 M280 110 V44" stroke="#087F78" stroke-opacity=".18"></path>
+    <path d="M48 96 C70 96 78 78 110 74 H190 C214 74 224 86 236 90 H286 C300 90 306 84 312 78" fill="none" stroke="#D5A547" stroke-width="2"></path>
+    <circle cx="118" cy="100" r="10" fill="none" stroke="#f4f1ea"></circle>
+    <circle cx="250" cy="100" r="10" fill="none" stroke="#f4f1ea"></circle>
   </svg>
   <footer class="foot"><span>تا پایان ۱۴۰۶ جمعا ۱۰ شعبه</span><span>محرمانه برای مذاکره</span></footer>
 </section>
@@ -487,7 +1285,7 @@ button.spend:hover{border-color:var(--accent)}
   <p class="note">این هدف طراحی است، نه نتیجه اندازه‌گیری‌شده.</p>
   <div class="grid g3">
     <div class="card"><h3>شروع</h3><p>ایران و تهران؛ خودرو صفر و کارکرده. تا پایان ۱۴۰۵ یک دفتر مرکزی و یک فرانچایز هدف‌گذاری شده، نه شبکه ۳۰تایی.</p></div>
-    <div class="card"><h3>پول این مرحله</h3><p>۳۰ میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵<span class="usd" data-m="30000"></span>. بودجه ناخالص شش‌ماهه ۱۸٫۴۵۵ میلیارد تومان<span class="usd" data-m="18455"></span> داخل همین بخش جا می‌شود. ۳۰ میلیارد تومان دیگر در ۱۴۰۶ برای توسعه شعبه است.</p></div>
+    <div class="card"><h3>پول این مرحله</h3><p>۳۰ میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵<span class="usd" data-m="30000"> · ۱۱۱٬۱۱۱ دلار</span>. بودجه ناخالص شش‌ماهه ۱۸٫۴۵۵ میلیارد تومان<span class="usd" data-m="18455"> · ۶۸٬۳۵۲ دلار</span> داخل همین بخش جا می‌شود. ۳۰ میلیارد تومان دیگر در ۱۴۰۶ برای توسعه شعبه است.</p></div>
     <div class="card"><h3>خارج از این سرمایه</h3><p>خرید گسترده موجودی خودرو داخل این دو بخش نیست. تا پایان ۱۴۰۶ جمع شعب با بخش توسعه به ۱۰ می‌رسد. از ۱۴۰۷ هر شعبه تازه از درآمد سیستم توسعه داده می‌شود.</p></div>
   </div>
   <footer class="foot"><span>وضعیت، هدف و فرض مالی در اسلایدهای بعد جدا شده‌اند</span><span></span></footer>
@@ -598,10 +1396,10 @@ button.spend:hover{border-color:var(--accent)}
 <section class="slide" data-title="مرکز و فرانچایز">
   <h2>تا پایان ۱۴۰۵ یک دفتر مرکزی و یک فرانچایز</h2>
   <div class="grid g2">
-    <div class="card"><h3>دفتر مرکزی</h3><p>فضایی در یک محل که هم کار اداری را پوشش دهد و هم امکان پذیرش خودرو داشته باشد. متراژ و تعداد طبقه نهایی نشده. هماهنگی شعب، بازاریابی، فناوری، پشتیبانی، آموزش و کنترل کیفیت. همه هزینه‌ها با شرکت. پیش اجاره شعبه مرکزی ۵ میلیارد تومان<span class="usd" data-m="5000"></span> وجه درگیر است، نه هزینه مصرف‌شده. اجاره همان شعبه ۴۰۰ میلیون تومان<span class="usd" data-m="400"></span> در ماه. تجهیز دفتر مرکزی و شعبه مرکزی ۳ میلیارد تومان<span class="usd" data-m="3000"></span>، برآورد تیم.</p></div>
+    <div class="card"><h3>دفتر مرکزی</h3><p>فضایی در یک محل که هم کار اداری را پوشش دهد و هم امکان پذیرش خودرو داشته باشد. متراژ و تعداد طبقه نهایی نشده. هماهنگی شعب، بازاریابی، فناوری، پشتیبانی، آموزش و کنترل کیفیت. همه هزینه‌ها با شرکت. پیش اجاره شعبه مرکزی ۵ میلیارد تومان<span class="usd" data-m="5000"> · ۱۸٬۵۱۹ دلار</span> وجه درگیر است، نه هزینه مصرف‌شده. اجاره همان شعبه ۴۰۰ میلیون تومان<span class="usd" data-m="400"> · ۱٬۴۸۱ دلار</span> در ماه. تجهیز دفتر مرکزی و شعبه مرکزی ۳ میلیارد تومان<span class="usd" data-m="3000"> · ۱۱٬۱۱۱ دلار</span>، برآورد تیم.</p></div>
     <div class="card"><h3>یک فرانچایز</h3><p>تا پایان ۱۴۰۵ افتتاح می‌شود و شروع به کار می‌کند. ملک، تجهیز، نیرو و عملیات با شریک. بازاریابی مرکزی و زیرساخت با سیستم یکپارچه معاملات خودرو. کمیسیون وصول‌شده ۵۰/۵۰. تعدیل بابت ضمانت، افیلیت و برگشت هنوز نهایی نیست. محل شعبه هنوز مشخص نشده است.</p></div>
   </div>
-  <p class="note" style="margin-top:8px">کارشناس ۴۰ میلیون تومان<span class="usd" data-m="40"></span> و سرپرست ۵۰ میلیون تومان<span class="usd" data-m="50"></span> در ماه، اعلام تیم. پاداش دو نفر در هر معامله فروشگاه شرکت ۵۰۰ هزار تومان<span class="usd" data-m="0.5"></span> تا ۱ میلیون تومان<span class="usd" data-m="1"></span>؛ میانگین محاسباتی ۷۵۰ هزار تومان<span class="usd" data-m="0.75"></span> یک فرض است.</p>
+  <p class="note" style="margin-top:8px">کارشناس ۴۰ میلیون تومان<span class="usd" data-m="40"> · ۱۴۸ دلار</span> و سرپرست ۵۰ میلیون تومان<span class="usd" data-m="50"> · ۱۸۵ دلار</span> در ماه، اعلام تیم. پاداش دو نفر در هر معامله فروشگاه شرکت ۵۰۰ هزار تومان<span class="usd" data-m="0.5"> · ۱٫۸۵ دلار</span> تا ۱ میلیون تومان<span class="usd" data-m="1"> · ۳٫۷۰ دلار</span>؛ میانگین محاسباتی ۷۵۰ هزار تومان<span class="usd" data-m="0.75"> · ۲٫۷۸ دلار</span> یک فرض است.</p>
   <footer class="foot"><span>مدل شعبه</span><span></span></footer>
 </section>
 
@@ -610,7 +1408,7 @@ button.spend:hover{border-color:var(--accent)}
   <div class="grid g3">
     <div class="card"><span class="tag">بازار</span><div class="figure" style="font-size:22px">۵ میلیون</div><span class="unit">معامله سالانه خودرو، از تعویض پلاک ناجا. ناوگان حدود ۲۵ میلیون سواری است و همه معامله نمی‌شوند.</span></div>
     <div class="card"><span class="tag">هدف ۳۰ شعبه</span><div class="figure" style="font-size:22px">۲٬۰۰۰</div><span class="unit">فروش ماهانه. سالانه ۲۴ هزار خودرو.</span></div>
-    <div class="card"><span class="tag">سهم از بازار</span><div class="figure" id="shareOfMarket">۰٫۴۸٪</div><span class="unit">۲۴ هزار معامله از ۵ میلیون. هدف شبکه است، نه فروش تحقق‌یافته.</span></div>
+    <div class="card"><span class="tag">سهم از بازار</span><div class="figure">۰٫۴۸٪</div><span class="unit">۲۴ هزار معامله از ۵ میلیون. هدف شبکه است، نه فروش تحقق‌یافته.</span></div>
   </div>
   <table style="margin-top:8px">
     <thead><tr><th>بازیگر</th><th>جذب</th><th>کارشناسی</th><th>معامله</th><th>حضور فیزیکی</th></tr></thead>
@@ -620,7 +1418,7 @@ button.spend:hover{border-color:var(--accent)}
       <tr><td>سایر پلتفرم‌ها و نمایشگاه‌های آفلاین</td><td>باقی بازار</td><td>در آفلاین نامتجانس</td><td>باقی‌مانده بازار</td><td>دارد</td></tr>
     </tbody>
   </table>
-  <p class="note">در نمونه‌های فعال این بازار روزانه نزدیک ۲۰ هزار درخواست فروش می‌آید. معمولاً ۵۰٪ رزرو و جذب می‌شود، ۵۰٪ از رزروها کارشناسی می‌شود و ۳۰٪ از کارشناسی‌شده‌ها معامله می‌شود. سود معامله خودرو معمولاً ۲ تا ۴ درصد قیمت است؛ خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان. سود تسهیلات موضوع جداست: کارنامه پارسال حدود ۱۰۰ میلیارد تومان<span class="usd" data-m="100000"></span> سود فقط از اعطای تسهیلات خودرو داشته و این رقم تعداد معامله نیست. تا ۱۴۰۳ فاصله تعویض خودرو حدود ۵ سال بوده و به‌تدریج به سمت ۳ سال می‌رود، چون خودرو در ایران ماهیت سرمایه‌گذاری دارد. برای حدود ۶۰٪ مردم، دارایی اصلی اول خودرو است، نه ملک.</p>
+  <p class="note">در نمونه‌های فعال این بازار روزانه نزدیک ۲۰ هزار درخواست فروش می‌آید. معمولاً ۵۰٪ رزرو و جذب می‌شود، ۵۰٪ از رزروها کارشناسی می‌شود و ۳۰٪ از کارشناسی‌شده‌ها معامله می‌شود. سود معامله خودرو معمولاً ۲ تا ۴ درصد قیمت است؛ خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان. سود تسهیلات موضوع جداست: کارنامه پارسال حدود ۱۰۰ میلیارد تومان<span class="usd" data-m="100000"> · ۳۷۰٬۳۷۰ دلار</span> سود فقط از اعطای تسهیلات خودرو داشته و این رقم تعداد معامله نیست. تا ۱۴۰۳ فاصله تعویض خودرو حدود ۵ سال بوده و به‌تدریج به سمت ۳ سال می‌رود، چون خودرو در ایران ماهیت سرمایه‌گذاری دارد. برای حدود ۶۰٪ مردم، دارایی اصلی اول خودرو است، نه ملک.</p>
   <footer class="foot"><span>حجم رقبا حدودی است</span><span></span></footer>
 </section>
 
@@ -641,25 +1439,25 @@ button.spend:hover{border-color:var(--accent)}
     <span>نتورک مارکتینگ</span>
   </div>
   <div class="card"><h3>افیلیت</h3><p>در ساختار خرید و فروش، نرخ جذب معمولاً ۲۵٪ است و برای این ساختار نرخ خوبی حساب می‌شود. پاداش بعد از معامله موفق و وصول است. معرفی تکراری باید کنترل شود. مبلغ پاداش هنوز نهایی نشده و در مدل، هزینه متغیر و قابل‌مشاهده است.</p></div>
-  <p class="note">بازاریابی تا پایان ۱۴۰۵ در جمع هزینه ثابت، ۳۰۰ میلیون تومان<span class="usd" data-m="300"></span> در ماه، اعلام تیم است. هزینه هر معامله موفق باید بعداً جدا اندازه گرفته شود.</p>
+  <p class="note">بازاریابی تا پایان ۱۴۰۵ در جمع هزینه ثابت، ۳۰۰ میلیون تومان<span class="usd" data-m="300"> · ۱٬۱۱۱ دلار</span> در ماه، اعلام تیم است. هزینه هر معامله موفق باید بعداً جدا اندازه گرفته شود.</p>
   <footer class="foot"><span>جذب</span><span></span></footer>
 </section>
 
 <section class="slide" data-title="اقتصاد معامله">
   <h2>کمیسیون از خریدار است؛ فروشنده کمیسیون نمی‌دهد</h2>
   <div class="grid g3">
-    <div class="card"><span class="tag">بازه کمیسیون</span><p>سود معامله معمولاً ۲ تا ۴ درصد قیمت است. خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان<span class="usd" data-m="80"></span>. قیمت متوسط مدل ۲٫۵ میلیارد تومان<span class="usd" data-m="2500"></span> است. محافظه‌کارانه ۵۰ میلیون، پیش‌فرض ۶۰ میلیون، و بالاتر ۱۰۰ میلیون تومان از خریدار.</p></div>
-    <div class="card"><span class="tag">سناریوی انتخاب‌شده</span><div class="figure" id="unitCommission">۶۰</div><span class="unit">میلیون تومان از خریدار. فروشنده کمیسیون نمی‌دهد. قبل از تقسیم شعبه.</span><span class="usd block" id="unitUsd" data-m="60"></span></div>
-    <div class="card"><span class="tag">سهم سیستم یکپارچه معاملات خودرو</span><p id="unitSplit">فروشگاه شرکت: کل کمیسیون منهای پاداش. فرانچایز: ۵۰٪ کمیسیون. پاداش فقط برای معامله فروشگاه شرکت در مدل نشسته است.</p></div>
+    <div class="card"><span class="tag">بازه کمیسیون</span><p>سود معامله معمولاً ۲ تا ۴ درصد قیمت است. خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان<span class="usd" data-m="80"> · ۲۹۶ دلار</span>. قیمت متوسط مدل ۲٫۵ میلیارد تومان<span class="usd" data-m="2500"> · ۹٬۲۵۹ دلار</span> است. محافظه‌کارانه ۵۰ میلیون، پیش‌فرض ۶۰ میلیون، و بالاتر ۱۰۰ میلیون تومان از خریدار.</p></div>
+    <div class="card"><span class="tag">سناریوی انتخاب‌شده</span><div class="figure">۶۰</div><span class="unit">میلیون تومان از خریدار. فروشنده کمیسیون نمی‌دهد. قبل از تقسیم شعبه.</span><span class="usd block" data-m="60">۲۲۲ دلار</span></div>
+    <div class="card"><span class="tag">سهم سیستم یکپارچه معاملات خودرو</span><p>در سناریوی انتخاب‌شده، هر معامله فروشگاه شرکت ۶۰ میلیون تومان · ۲۲۲ دلار قبل از پاداش برای سیستم یکپارچه معاملات خودرو می‌ماند و هر معامله فرانچایز ۳۰ میلیون تومان · ۱۱۱ دلار. پاداش فرضی هر معامله شرکت ۰٫۷۵ میلیون تومان · ۲٫۷۸ دلار است.</p></div>
   </div>
-  <p class="note" id="unitNote" style="margin-top:10px"></p>
+  <p class="note" style="margin-top:10px">قیمت متوسط ۲٫۵۰ میلیارد تومان · ۹٬۲۵۹ دلار. اگر حالت درصدی باشد، کمیسیون برابر قیمت ضربدر نرخ است و با مبلغ ثابت جمع نمی‌شود.</p>
   <footer class="foot"><span>موجودی ملکی و کمیسیون در یک عدد جمع نشده‌اند</span><span></span></footer>
 </section>
 
 <section class="slide" data-title="سناریو و سربه‌سر">
   <h2>درآمد ماه، و ماهی که جمع مانده عملیاتی مثبت می‌شود</h2>
-  <div class="grid g4" id="scenarioCards"></div>
-  <p class="note" id="breakevenNote"></p>
+  <div class="grid g4"><div class="card pick"><span class="tag">انتخاب‌شده · ۶۰</span><div class="figure">ماه ۴</div><span class="unit">جمع مانده عملیاتی از این ماه مثبت است</span><p>درآمد ماه در ظرفیت ۲٫۳۴ میلیارد تومان · ۸٬۶۶۷ دلار. شش‌ماهه ۱۰٫۹۸ میلیارد تومان · ۴۰٬۶۶۷ دلار. هزینه همان ماه از ماه ۳ پوشیده می‌شود.</p></div><div class="card"><span class="tag">محافظه‌کارانه · ۵۰</span><div class="figure">ماه ۶</div><span class="unit">جمع مانده عملیاتی از این ماه مثبت است</span><p>درآمد ماه در ظرفیت ۱٫۹۵ میلیارد تومان · ۷٬۲۲۲ دلار. شش‌ماهه ۹٫۱۵ میلیارد تومان · ۳۳٬۸۸۹ دلار. هزینه همان ماه از ماه ۳ پوشیده می‌شود.</p></div><div class="card"><span class="tag">پیش‌فرض · ۶۰</span><div class="figure">ماه ۴</div><span class="unit">جمع مانده عملیاتی از این ماه مثبت است</span><p>درآمد ماه در ظرفیت ۲٫۳۴ میلیارد تومان · ۸٬۶۶۷ دلار. شش‌ماهه ۱۰٫۹۸ میلیارد تومان · ۴۰٬۶۶۷ دلار. هزینه همان ماه از ماه ۳ پوشیده می‌شود.</p></div><div class="card"><span class="tag">بالاتر · ۱۰۰</span><div class="figure">ماه ۳</div><span class="unit">جمع مانده عملیاتی از این ماه مثبت است</span><p>درآمد ماه در ظرفیت ۳٫۹۰ میلیارد تومان · ۱۴٬۴۴۴ دلار. شش‌ماهه ۱۸٫۳۰ میلیارد تومان · ۶۷٬۷۷۸ دلار. هزینه همان ماه از ماه ۲ پوشیده می‌شود.</p></div></div>
+  <p class="note">مسیر رشد هر فروشگاه: ماه اول ۵ معامله، ماه دوم ۱۳، سپس ۲۶. سه کارت مرجع برای یک دفتر مرکزی، یک فرانچایز و هزینه ثابت ۱٫۴۵ میلیارد تومان · ۵٬۳۷۰ دلار ثابت‌اند و هزینه متغیر ندارند. کارت انتخاب‌شده از پنل می‌آید و پاداش، افیلیت و ذخیره ضمانت را کم می‌کند. در این کارت، پوشش معامله‌ای ۳۲٫۵ معامله شبکه است. جمع مثبت‌شدن مانده، بازگشت ودیعه، تجهیز، سرمایه ۶۰ میلیارد تومان · ۲۲۲٬۲۲۲ دلار یا سود بعد از مالیات نیست.</p>
   <footer class="foot"><span>این سربه‌سر بازگشت سرمایه، ودیعه یا تجهیز نیست</span><span></span></footer>
 </section>
 
@@ -681,8 +1479,8 @@ button.spend:hover{border-color:var(--accent)}
 <section class="slide" data-title="سی فروشگاه">
   <h2>سه عدد را با هم قاطی نکنید</h2>
   <p class="lead">هدف تجاری ۳۰ شعبه، ۲٬۰۰۰ معامله در ماه است. ضرب این عدد در کمیسیون، درآمد ناخالص قبل از تقسیم فرانچایز است. ترکیب سال چهارم: ۲۰ شعبه شرکت و ۱۰ فرانچایز. این فروش تحقق‌یافته نیست و پایان ۱۴۰۶ هم نیست.</p>
-  <div id="layerCards" class="grid g3"></div>
-  <p class="note" id="layerNote"></p>
+  <div class="grid g3"><div class="card"><span class="tag">ارزش کل معاملات</span><div class="figure" style="font-size:22px">۵٬۰۰۰ میلیارد تومان · ۱۸٬۵۱۸٬۵۱۹ دلار</div><span class="unit">۲٬۰۰۰ معامله در ماه ضربدر قیمت متوسط. حجم خودرو است، نه درآمد شرکت.</span></div><div class="card"><span class="tag">درآمد شرکت</span><div class="figure" style="font-size:22px">۱۰۰ میلیارد تومان · ۳۷۰٬۳۷۰ دلار</div><span class="unit">کمیسیون بعد از سهم فرانچایز. شعبه شرکت کل کمیسیون را دارد و فرانچایز فقط سهم شرکت را می‌دهد. خدمات در مدل پایه صفر است.</span></div><div class="card"><span class="tag">مانده عملیاتی</span><div class="figure" style="font-size:22px">۹۴٫۴۱۵ میلیارد تومان · ۳۴۹٬۶۸۵ دلار</div><span class="unit">بعد از پاداش، افیلیت، ضمانت و هزینه مقایسه‌ای. سود خالص و قابل تقسیم نیست.</span></div></div>
+  <p class="note">کمیسیون از خریدار است و فروشنده کمیسیون نمی‌دهد. درآمد ناخالص قبل از تقسیم فرانچایز ۱۲۰ میلیارد تومان · ۴۴۴٬۴۴۴ دلار است. سود خالص ۴۰ میلیارد در پروپوزال برابر ۱۰۰ منهای ۶۰ میلیارد هزینه کامل اعلام‌شده تیم است: ۳۰ شعبه، دفتر، نیرو، بازاریابی، مالیات و عملیات. این ۴۰ فقط اگر سهم فرانچایز هم داخل همان ۶۰ باشد با درآمد شرکت ۱۰۰ میلیارد تومان · ۳۷۰٬۳۷۰ دلار جمع می‌شود. مانده این اسلاید هزینه مقایسه‌ای مدل راه‌اندازی است و آن ۴۰ نیست.</p>
   <footer class="foot"><span>خدمات در مدل پایه صفر است</span><span>فرض ۲۶ معامله در پیوست است</span></footer>
 </section>
 
@@ -710,18 +1508,18 @@ button.spend:hover{border-color:var(--accent)}
       <ol>
         <li><span><b>حامد رحیمی، مدیرعامل</b>استراتژی، توسعه و مدیریت اجرایی. حدود هشت سال در معاملات خودرو. ۲۵٪ سهام.</span></li>
         <li><span><b>سهیل مقدم، معاون اجرایی</b>هماهنگی واحدها، اجرای فرایند و عملکرد شعب. ۲۵٪ سهام.</span></li>
-        <li><span><b>سعید محمدی، مدیر فناوری</b>پلتفرم، داده و امنیت. ۲۵٪ سهام. حقوق پیشنهادی ۱۰۰ میلیون تومان<span class="usd" data-m="100"></span> با زیرساخت فنی و ذخیره توسعه نرم‌افزار یکی نیست.</span></li>
+        <li><span><b>سعید محمدی، مدیر فناوری</b>پلتفرم، داده و امنیت. ۲۵٪ سهام. حقوق پیشنهادی ۱۰۰ میلیون تومان<span class="usd" data-m="100"> · ۳۷۰ دلار</span> با زیرساخت فنی و ذخیره توسعه نرم‌افزار یکی نیست.</span></li>
       </ol>
     </section>
     <section>
       <h3>باید کامل شود</h3>
       <ol>
-        <li><span><b>کارشناس و سرپرست فروشگاه</b>باید جذب شود. ۴۰ میلیون تومان<span class="usd" data-m="40"></span> و ۵۰ میلیون تومان<span class="usd" data-m="50"></span>، اعلام تیم.</span></li>
-        <li><span><b>مالی، حقوقی، منابع انسانی</b>نیازمند نهایی‌سازی. داخل ذخیره ۷۰ میلیون تومان<span class="usd" data-m="70"></span>، نه چارت قطعی.</span></li>
+        <li><span><b>کارشناس و سرپرست فروشگاه</b>باید جذب شود. ۴۰ میلیون تومان<span class="usd" data-m="40"> · ۱۴۸ دلار</span> و ۵۰ میلیون تومان<span class="usd" data-m="50"> · ۱۸۵ دلار</span>، اعلام تیم.</span></li>
+        <li><span><b>مالی، حقوقی، منابع انسانی</b>نیازمند نهایی‌سازی. داخل ذخیره ۷۰ میلیون تومان<span class="usd" data-m="70"> · ۲۵۹ دلار</span>، نه چارت قطعی.</span></li>
       </ol>
     </section>
   </div>
-  <p class="note" style="margin-top:8px">حقوق و مزایای سه مدیر مؤسس بابت کار اجرایی در بودجه عملیاتی است و از سود سهام جداست. سرمایه‌گذار هم ۲۵٪ است. حقوق مدیر فناوری با زیرساخت فنی ۵۰ میلیون تومان<span class="usd" data-m="50"></span> و ذخیره توسعه نرم‌افزار ۱۰۰ میلیون تومان<span class="usd" data-m="100"></span> یکی نیست.</p>
+  <p class="note" style="margin-top:8px">حقوق و مزایای سه مدیر مؤسس بابت کار اجرایی در بودجه عملیاتی است و از سود سهام جداست. سرمایه‌گذار هم ۲۵٪ است. حقوق مدیر فناوری با زیرساخت فنی ۵۰ میلیون تومان<span class="usd" data-m="50"> · ۱۸۵ دلار</span> و ذخیره توسعه نرم‌افزار ۱۰۰ میلیون تومان<span class="usd" data-m="100"> · ۳۷۰ دلار</span> یکی نیست.</p>
   <footer class="foot"><span>تیم</span><span></span></footer>
 </section>
 
@@ -742,20 +1540,20 @@ button.spend:hover{border-color:var(--accent)}
   <h2>۳۰ میلیارد ۱۴۰۵ در پنج سرفصل دیده می‌شود و ۳۰ میلیارد ۱۴۰۶ برای شعبه است</h2>
   <table>
     <thead><tr><th>سرفصل</th><th>مبلغ</th><th>زمان</th><th>خروجی قابل‌سنجش</th></tr></thead>
-    <tbody id="useBody"></tbody>
+    <tbody><tr><td>تکمیل تکنولوژی</td><td>۹۰۰ میلیون تومان · ۳٬۳۳۳ دلار</td><td>شش ماه اول</td><td>رونمایی آذر ۱۴۰۵. نسخه قابل نمایش اکنون نیست. تعداد کاربر وعده نشده.</td></tr><tr><td>دفتر و شعبه اول</td><td>۱۰٫۴۰ میلیارد تومان · ۳۸٬۵۱۹ دلار</td><td>پیش و تجهیز در شروع؛ اجاره در شش ماه</td><td>یک محل اداری با پذیرش خودرو. متراژ نهایی نشده. پیش، وجه درگیر است.</td></tr><tr><td>بازاریابی و شبکه</td><td>۲٫۴۰ میلیارد تومان · ۸٬۸۸۹ دلار</td><td>شش ماه اول</td><td>شروع کانال‌های اعلام‌شده. هزینه هر معامله موفق هنوز اندازه گرفته نشده.</td></tr><tr><td>نیرو و عملیات</td><td>۳ میلیارد تومان · ۱۱٬۱۱۱ دلار</td><td>شش ماه اول</td><td>سه مدیر موجود و جذب کارشناس و سرپرست. چارت مالی و حقوقی قطعی نیست.</td></tr><tr><td>ذخیره ریسک</td><td>۱٫۷۵۵ میلیارد تومان · ۶٬۵۰۰ دلار</td><td>کنار بودجه شش‌ماهه</td><td>ذخیره ۱۵٪ روی تجهیز و هزینه شش ماه. ذخیره خسارت ضمانت صفر است.</td></tr><tr><td>توسعه شعبه ۱۴۰۶</td><td>۳۰ میلیارد تومان · ۱۱۱٬۱۱۱ دلار</td><td>سال ۱۴۰۶</td><td>تا پایان ۱۴۰۶ جمع شعب ۱۰ می‌شود. ریز این ۳۰ میلیارد جدا ساخته نشده. از ۱۴۰۷ شعبه جدید از درآمد سیستم است.</td></tr></tbody>
   </table>
-  <p class="note" id="useNote"></p>
+  <p class="note">جمع پنج سرفصل راه‌اندازی ۱۸٫۴۵۵ میلیارد تومان · ۶۸٬۳۵۲ دلار است. باقی ۳۰ میلیارد ۱۴۰۵، ۱۱٫۵۴۵ میلیارد تومان · ۴۲٬۷۵۹ دلار، تخصیص داده نشده و برایش مصرفی ساخته نشده. ۳۰ میلیارد ۱۴۰۶ برای توسعه شعبه تا جمع ۱۰ شعبه است. پیش داخل سرفصل دفتر است و هزینه مصرف‌شده نیست.</p>
   <footer class="foot"><span>باقی راه‌اندازی ۱۴۰۵ ریز نشده</span><span>از ۱۴۰۷ شعبه از درآمد سیستم</span></footer>
 </section>
 
 <section class="slide" data-title="سناریوی ارزش">
   <h2>۴ همت سناریوی هدف است، نه ارزش تضمین‌شده</h2>
   <div class="grid g2">
-    <div class="card"><h3>قیمت همین دور</h3><p id="roundValue"></p></div>
-    <div class="card"><h3>سناریوی سال چهارم</h3><p id="targetValue"></p></div>
+    <div class="card"><h3>قیمت همین دور</h3><p>۳۰ میلیارد تومان · ۱۱۱٬۱۱۱ دلار در ۱۴۰۵ و ۳۰ میلیارد تومان · ۱۱۱٬۱۱۱ دلار در ۱۴۰۶ به حساب شرکت و از راه افزایش سرمایه می‌آید. قیمت پس از پول ۲۴۰ میلیارد تومان · ۸۸۸٬۸۸۹ دلار و پیش از پول ۱۸۰ میلیارد تومان · ۶۶۶٬۶۶۷ دلار است. ارزش ۲۵٪ در این قیمت برابر جمع ۶۰ میلیارد است.</p></div>
+    <div class="card"><h3>سناریوی سال چهارم</h3><p>۴ همت از بخش پروپوزال همین سند استخراج شده است: داستان رشد، با ۳۰ شعبه، ۲٬۰۰۰ معامله ماهانه و سود خالص ۴۰ میلیارد. ۴۰ میلیارد در سال ۴۸۰ میلیارد می‌شود و ۴ همت حدود ۸٫۳ برابر آن سود سالانه است. این نسبت ارزش‌گذاری شخص ثالث نیست.</p></div>
   </div>
   <div class="grid g4" style="margin-top:10px">
-    <div class="card"><h3>سود عملیاتی</h3><p id="methodEbitda"></p></div>
+    <div class="card"><h3>سود عملیاتی</h3><p>سود خالص ۴۰ میلیارد، ۱۰۰ منهای ۶۰ میلیارد هزینه کامل اعلام‌شده تیم است و مالیات را هم در بر می‌گیرد. مانده عملیاتی این مدل، هزینه مقایسه‌ای راه‌اندازی است و با آن ۴۰ یکی نیست.</p></div>
     <div class="card"><h3>درآمد تکرارشونده</h3><p>در مدل پایه درآمد خدمات صفر است. کمیسیون هر معامله، اشتراک ماهانه نیست.</p></div>
     <div class="card"><h3>رشد شبکه</h3><p>جدول چهارساله سناریوی پیشنهادی است. شمار شعبه به‌تنهایی ارزش قطعی نمی‌سازد.</p></div>
     <div class="card"><h3>شرکت‌های مشابه</h3><p>معامله واقعی بازار برای ارزش‌گذاری در این طرح نیست. حجم همراه مکانیک، مضرب ارزش نیست.</p></div>
@@ -766,13 +1564,13 @@ button.spend:hover{border-color:var(--accent)}
 <section class="slide navy" data-title="پیشنهاد سرمایه‌گذاری">
   <h2>۳۰ میلیارد ۱۴۰۵ و ۳۰ میلیارد ۱۴۰۶، خرید ۲۵٪ سهام است نه قرض</h2>
   <div class="grid g3">
-    <div class="card pick"><span class="tag">بهای سهام</span><div class="figure ask">۳۰</div><span class="unit">میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵. ۳۰ میلیارد دیگر در ۱۴۰۶ برای توسعه شعبه. این پول برنمی‌گردد.</span><span class="usd block" data-m="30000"></span></div>
-    <div class="card"><span class="tag">قیمت همین دور</span><div class="figure">۲۴۰</div><span class="unit">میلیارد تومان پس از ورود جمع ۶۰. پیش از پول ۱۸۰. سهم ۲۵٪ برابر جمع دو بخش است.</span><span class="usd block" data-m="240000"></span></div>
-    <div class="card"><span class="tag">اگر سودی باشد</span><div class="figure" id="incomeMonth">تقسیم</div><span class="unit" id="incomeUnit"></span></div>
+    <div class="card pick"><span class="tag">بهای سهام</span><div class="figure ask">۳۰</div><span class="unit">میلیارد تومان برای راه‌اندازی کامل شرکت در ۱۴۰۵. ۳۰ میلیارد دیگر در ۱۴۰۶ برای توسعه شعبه. این پول برنمی‌گردد.</span><span class="usd block" data-m="30000">۱۱۱٬۱۱۱ دلار</span></div>
+    <div class="card"><span class="tag">قیمت همین دور</span><div class="figure">۲۴۰</div><span class="unit">میلیارد تومان پس از ورود جمع ۶۰. پیش از پول ۱۸۰. سهم ۲۵٪ برابر جمع دو بخش است.</span><span class="usd block" data-m="240000">۸۸۸٬۸۸۹ دلار</span></div>
+    <div class="card"><span class="tag">اگر سودی باشد</span><div class="figure">تقسیم</div><span class="unit">هر سال اگر سودی باشد، به نسبت سهم تقسیم می‌شود. ممکن است یکی دو سال سودی نباشد. شرکت هنوز درآمد بالای محقق‌شده ندارد.</span></div>
   </div>
   <div class="grid g2">
-    <div class="card"><h3>پول بابت چیست</h3><p id="investGap"></p></div>
-    <div class="card"><h3>بعد، داخل خود شرکت</h3><div class="figure" id="paybackMonth">—</div><span class="unit" id="paybackUnit"></span></div>
+    <div class="card"><h3>پول بابت چیست</h3><p>۳۰ میلیارد تومان · ۱۱۱٬۱۱۱ دلار برای راه‌اندازی کامل شرکت در ۱۴۰۵ و ۳۰ میلیارد تومان · ۱۱۱٬۱۱۱ دلار برای توسعه شعبه در ۱۴۰۶ به حساب شرکت می‌آید، نه به حساب مؤسسان. تا پایان ۱۴۰۶ جمع شعب ۱۰ است. از ۱۴۰۷ شعبه جدید از درآمد سیستم توسعه داده می‌شود. سرمایه‌گذار ۲۵٪ پس از افزایش سرمایه را می‌گیرد. قیمت پس از این دور ۲۴۰ میلیارد تومان · ۸۸۸٬۸۸۹ دلار و پیش از پول ۱۸۰ میلیارد تومان · ۶۶۶٬۶۶۷ دلار است. خرید سهام است، نه قرض.</p></div>
+    <div class="card"><h3>بعد، داخل خود شرکت</h3><div class="figure">ماه ۷۳</div><span class="unit">مانده عملیاتی همین دو فروشگاه به اندازه جمع ۶۰ میلیارد داخل شرکت جمع می‌شود و بعد صرف هزینه و توسعه خود سیستم می‌شود. به سرمایه‌گذار پس داده نمی‌شود.</span></div>
   </div>
   <footer class="foot"><span>خرید سهام است، نه بازپرداخت</span><span>پیشنهاد مذاکره</span></footer>
 </section>
@@ -782,28 +1580,28 @@ button.spend:hover{border-color:var(--accent)}
   <div class="grid g2 cost-board">
     <div class="card">
       <span class="tag">جمع ماهانه</span>
-      <div class="figure" id="fixedTotal">۱٫۴۵</div>
-      <span class="unit" id="fixedTotalUnit">میلیارد تومان، بدون ودیعه و تجهیز</span>
-      <span class="usd block" id="fixedUsd" data-m="1450"></span>
+      <div class="figure">۱٫۴۵</div>
+      <span class="unit">میلیارد تومان در ماه، بدون ودیعه و تجهیز</span>
+      <span class="usd block" data-m="1450">۵٬۳۷۰ دلار</span>
       <div class="cost-lines">
-        <label><span>اجاره شعبه مرکزی</span><span class="cost-bar"><span id="bar-cRent"></span></span><input id="cRent" type="number" min="0" step="1" value="400"><span class="usd" id="usd-cRent" data-m="400"></span></label>
-        <label><span>کارشناس و سرپرست</span><span class="cost-bar"><span id="bar-cStaff"></span></span><input id="cStaff" type="number" min="0" step="1" value="90"><span class="usd" id="usd-cStaff" data-m="90"></span></label>
-        <label><span>سه مدیر</span><span class="cost-bar"><span id="bar-cManagers"></span></span><input id="cManagers" type="number" min="0" step="1" value="260"><span class="usd" id="usd-cManagers" data-m="260"></span></label>
-        <label><span>زیرساخت فنی</span><span class="cost-bar"><span id="bar-cInfra"></span></span><input id="cInfra" type="number" min="0" step="1" value="50"><span class="usd" id="usd-cInfra" data-m="50"></span></label>
-        <label><span>بازاریابی</span><span class="cost-bar"><span id="bar-cMarket"></span></span><input id="cMarket" type="number" min="0" step="1" value="300"><span class="usd" id="usd-cMarket" data-m="300"></span></label>
-        <label><span>توسعه نرم‌افزار</span><span class="cost-bar"><span id="bar-cSoft"></span></span><input id="cSoft" type="number" min="0" step="1" value="100"><span class="usd" id="usd-cSoft" data-m="100"></span></label>
-        <label><span>تله‌مارکتینگ</span><span class="cost-bar"><span id="bar-cTele"></span></span><input id="cTele" type="number" min="0" step="1" value="100"><span class="usd" id="usd-cTele" data-m="100"></span></label>
-        <label><span>مالی و اداری</span><span class="cost-bar"><span id="bar-cAdmin"></span></span><input id="cAdmin" type="number" min="0" step="1" value="70"><span class="usd" id="usd-cAdmin" data-m="70"></span></label>
-        <label><span>بیمه و استخدام</span><span class="cost-bar"><span id="bar-cInsure"></span></span><input id="cInsure" type="number" min="0" step="1" value="80"><span class="usd" id="usd-cInsure" data-m="80"></span></label>
+        <label><span>اجاره شعبه مرکزی</span><span class="cost-bar"><span style="width: 27.5862%;"></span></span><input disabled type="text" min="0" step="1" value="400" inputmode="decimal"><span class="usd" data-m="400"> · ۱٬۴۸۱ دلار</span></label>
+        <label><span>کارشناس و سرپرست</span><span class="cost-bar"><span style="width: 6.2069%;"></span></span><input disabled type="text" min="0" step="1" value="90" inputmode="decimal"><span class="usd" data-m="90"> · ۳۳۳ دلار</span></label>
+        <label><span>سه مدیر</span><span class="cost-bar"><span style="width: 17.931%;"></span></span><input disabled type="text" min="0" step="1" value="260" inputmode="decimal"><span class="usd" data-m="260"> · ۹۶۳ دلار</span></label>
+        <label><span>زیرساخت فنی</span><span class="cost-bar"><span style="width: 3.44828%;"></span></span><input disabled type="text" min="0" step="1" value="50" inputmode="decimal"><span class="usd" data-m="50"> · ۱۸۵ دلار</span></label>
+        <label><span>بازاریابی</span><span class="cost-bar"><span style="width: 20.6897%;"></span></span><input disabled type="text" min="0" step="1" value="300" inputmode="decimal"><span class="usd" data-m="300"> · ۱٬۱۱۱ دلار</span></label>
+        <label><span>توسعه نرم‌افزار</span><span class="cost-bar"><span style="width: 6.89655%;"></span></span><input disabled type="text" min="0" step="1" value="100" inputmode="decimal"><span class="usd" data-m="100"> · ۳۷۰ دلار</span></label>
+        <label><span>تله‌مارکتینگ</span><span class="cost-bar"><span style="width: 6.89655%;"></span></span><input disabled type="text" min="0" step="1" value="100" inputmode="decimal"><span class="usd" data-m="100"> · ۳۷۰ دلار</span></label>
+        <label><span>مالی و اداری</span><span class="cost-bar"><span style="width: 4.82759%;"></span></span><input disabled type="text" min="0" step="1" value="70" inputmode="decimal"><span class="usd" data-m="70"> · ۲۵۹ دلار</span></label>
+        <label><span>بیمه و استخدام</span><span class="cost-bar"><span style="width: 5.51724%;"></span></span><input disabled type="text" min="0" step="1" value="80" inputmode="decimal"><span class="usd" data-m="80"> · ۲۹۶ دلار</span></label>
       </div>
     </div>
     <div>
       <div class="card fit-lines">
         <span class="tag">تجهیز، یک‌بار</span>
-        <label>دفتر و شعبه مرکزی<input id="centerFit" type="number" min="0" step="1" value="3000"></label>
-        <p class="note">پیش اجاره شعبه مرکزی ۵ میلیارد تومان<span class="usd" data-m="5000"></span> است. داخل جمع ماهانه و داخل تجهیز نیست.</p>
-        <label>هر شعبه شرکت<input id="branchFit" type="number" min="0" step="1" value="225"></label>
-        <p class="note" id="branchFitNote"></p>
+        <label>دفتر و شعبه مرکزی<input disabled type="text" min="0" step="1" value="3000" inputmode="decimal"></label>
+        <p class="note">پیش اجاره شعبه مرکزی ۵ میلیارد تومان<span class="usd" data-m="5000"> · ۱۸٬۵۱۹ دلار</span> است. داخل جمع ماهانه و داخل تجهیز نیست.</p>
+        <label>هر شعبه شرکت<input disabled type="text" min="0" step="1" value="225" inputmode="decimal"></label>
+        <p class="note">تجهیز دفتر مرکزی و شعبه مرکزی ۳ میلیارد تومان · ۱۱٬۱۱۱ دلار و پیش ۵ میلیارد تومان · ۱۸٬۵۱۹ دلار است. هر شعبه شرکت بعدی ۲۲۵ میلیون تومان · ۸۳۳ دلار تجهیز می‌خواهد. در مسیر ۲۰ شعبه شرکت، ۱۹ شعبه اضافه است و جمع تجهیزشان ۴٫۲۷۵ میلیارد تومان · ۱۵٬۸۳۳ دلار. فرانچایز با شریک است.</p>
       </div>
       <div class="card" style="margin-top:10px">
         <span class="tag">نیازمند نهایی‌سازی</span>
@@ -813,7 +1611,7 @@ button.spend:hover{border-color:var(--accent)}
       </div>
     </div>
   </div>
-  <p class="note" id="assumptionLive"></p>
+  <p class="note">سناریوی فعال: کمیسیون ۶۰ میلیون تومان · ۲۲۲ دلار، ۱ فروشگاه شرکت و ۱ فرانچایز، افیلیت هر معامله ۰ میلیون تومان · ۰٫۰۰ دلار. اعداد این جدول به میلیون تومان‌اند.</p>
   <footer class="foot"><span>حقوق فناوری با زیرساخت و ذخیره توسعه یکی نیست</span><span>ودیعه و تجهیز داخل جمع ماهانه نیست</span></footer>
 </section>
 
@@ -821,9 +1619,9 @@ button.spend:hover{border-color:var(--accent)}
   <h2>شش ماه اول: بودجه ناخالص جدا از نیاز اوج نقدینگی</h2>
   <table>
     <thead><tr><th>ماه</th><th>معامله هر شعبه</th><th>معامله همه شعب</th><th>درآمد</th><th>ثابت</th><th>متغیر</th><th>خالص ماه</th><th>نقد دریافتی</th></tr></thead>
-    <tbody id="cashBody"></tbody>
+    <tbody><tr><td>۱</td><td>۵</td><td>۱۰ · ۲ شعبه</td><td>۴۵۰<span class="usd">۱٬۶۶۷ دلار</span></td><td>۱٬۴۵۰<span class="usd">۵٬۳۷۰ دلار</span></td><td>۳٫۷۵<span class="usd">۱۳٫۹ دلار</span></td><td>−۱٬۰۰۳٫۷۵<span class="usd">−۳٬۷۱۸ دلار</span></td><td>۴۵۰<span class="usd">۱٬۶۶۷ دلار</span></td></tr><tr><td>۲</td><td>۱۳</td><td>۲۶ · ۲ شعبه</td><td>۱٬۱۷۰<span class="usd">۴٬۳۳۳ دلار</span></td><td>۱٬۴۵۰<span class="usd">۵٬۳۷۰ دلار</span></td><td>۹٫۷۵<span class="usd">۳۶٫۱ دلار</span></td><td>−۲۸۹٫۷۵<span class="usd">−۱٬۰۷۳ دلار</span></td><td>۱٬۱۷۰<span class="usd">۴٬۳۳۳ دلار</span></td></tr><tr><td>۳</td><td>۲۶</td><td>۵۲ · ۲ شعبه</td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td><td>۱٬۴۵۰<span class="usd">۵٬۳۷۰ دلار</span></td><td>۱۹٫۵۰<span class="usd">۷۲٫۲ دلار</span></td><td>۸۷۰٫۵۰<span class="usd">۳٬۲۲۴ دلار</span></td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td></tr><tr><td>۴</td><td>۲۶</td><td>۵۲ · ۲ شعبه</td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td><td>۱٬۴۵۰<span class="usd">۵٬۳۷۰ دلار</span></td><td>۱۹٫۵۰<span class="usd">۷۲٫۲ دلار</span></td><td>۸۷۰٫۵۰<span class="usd">۳٬۲۲۴ دلار</span></td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td></tr><tr><td>۵</td><td>۲۶</td><td>۵۲ · ۲ شعبه</td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td><td>۱٬۴۵۰<span class="usd">۵٬۳۷۰ دلار</span></td><td>۱۹٫۵۰<span class="usd">۷۲٫۲ دلار</span></td><td>۸۷۰٫۵۰<span class="usd">۳٬۲۲۴ دلار</span></td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td></tr><tr><td>۶</td><td>۲۶</td><td>۵۲ · ۲ شعبه</td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td><td>۱٬۴۵۰<span class="usd">۵٬۳۷۰ دلار</span></td><td>۱۹٫۵۰<span class="usd">۷۲٫۲ دلار</span></td><td>۸۷۰٫۵۰<span class="usd">۳٬۲۲۴ دلار</span></td><td>۲٬۳۴۰<span class="usd">۸٬۶۶۷ دلار</span></td></tr></tbody>
   </table>
-  <p class="note" id="cashNote"></p>
+  <p class="note">بودجه ناخالص مرجع قبل از درآمد ۱۸٫۴۵۵ میلیارد تومان · ۶۸٬۳۵۲ دلار است: ودیعه ۵ میلیارد تومان · ۱۸٬۵۱۹ دلار، تجهیز دفتر مرکزی ۳ میلیارد تومان · ۱۱٬۱۱۱ دلار، شش ماه هزینه ثابت ۸٫۷۰ میلیارد تومان · ۳۲٬۲۲۲ دلار و ذخیره ۱۵٪ برابر ۱٫۷۵۵ میلیارد تومان · ۶٬۵۰۰ دلار. در سناریوی انتخاب‌شده کسری انباشته عملیاتی تا پیش از مثبت شدن ۱٫۲۹۴ میلیارد تومان · ۴٬۷۹۱ دلار است. وصول بعد از این شش ماه ۰ میلیون تومان · ۰٫۰۰ دلار. تأخیر وصول فرض پنل است. ودیعه وجه درگیر است. تجهیز شعب بعدی داخل بودجه شش‌ماهه راه‌اندازی نیست و در ۳۰ میلیارد توسعه شعبه سال ۱۴۰۶ است. از ۱۴۰۷ شعبه جدید از درآمد سیستم است.</p>
   <footer class="foot"><span>دو ستون اول تعداد معامله است؛ بقیه میلیون تومان</span><span>ودیعه هزینه عملیاتی نیست</span></footer>
 </section>
 
@@ -831,7 +1629,7 @@ button.spend:hover{border-color:var(--accent)}
   <h2>سناریوی سال چهارم: ۲۰ شعبه شرکت و ۱۰ فرانچایز</h2>
   <table>
     <thead><tr><th>ترکیب</th><th>شرکت</th><th>فرانچایز</th><th>درآمد ماه ظرفیت</th><th>هزینه ماه مقایسه‌ای</th><th>سرمایه ملک شعب جدید</th></tr></thead>
-    <tbody id="mixBody"></tbody>
+    <tbody><tr><td>فرانچایزمحور</td><td>۱</td><td>۲۹</td><td>۲۴٫۱۸ میلیارد تومان · ۸۹٬۵۵۶ دلار</td><td>۱٫۴۵ میلیارد تومان · ۵٬۳۷۰ دلار</td><td>صفر؛ شعبه جدید شرکت ندارد</td></tr><tr><td>شبکه هدف، فرض</td><td>۲۰</td><td>۱۰</td><td>۳۹ میلیارد تومان · ۱۴۴٬۴۴۴ دلار</td><td>۴٫۵۸۵ میلیارد تومان · ۱۶٬۹۸۱ دلار</td><td>۷۵٫۵۲۵ میلیارد تومان · ۲۷۹٬۷۲۲ دلار</td></tr><tr><td>مالکیت مستقیم غالب</td><td>۲۸</td><td>۲</td><td>۴۵٫۲۴ میلیارد تومان · ۱۶۷٬۵۵۶ دلار</td><td>۵٫۹۰۵ میلیارد تومان · ۲۱٬۸۷۰ دلار</td><td>۱۰۷٫۳۲۵ میلیارد تومان · ۳۹۷٬۵۰۰ دلار</td></tr></tbody>
   </table>
   <p class="note">درآمد این جدول از معامله هر فروشگاه در پنل است، پیش‌فرض ۲۶ معامله، نه هدف ۲٬۰۰۰تایی کل شبکه. هزینه مقایسه‌ای، هزینه ثابت فعلی به‌علاوه نیروی و اجاره قیاس‌شده شعب جدید شرکت است و رشد بازاریابی را صفر نشان می‌دهد مگر در پنل عوض شود. توسعه تا ۱۰ شعبه در ۳۰ میلیارد سال ۱۴۰۶ است. از ۱۴۰۷ به بعد شعبه جدید، از جمله مسیر ۳۰ شعبه سال چهارم، از درآمد سیستم تأمین می‌شود. همه ارقام به قیمت مبنای فعلی، قبل از رشد هزینه‌ها.</p>
   <footer class="foot"><span>پیوست توسعه</span><span></span></footer>
@@ -839,7 +1637,7 @@ button.spend:hover{border-color:var(--accent)}
 
 <section class="slide" data-title="پیوست تورم و دلار">
   <h2>نمای دلاری با نرخ روز فرض‌ها حساب می‌شود</h2>
-  <div class="grid g3" id="fxCards"></div>
+  <div class="grid g3"><div class="card"><h3>درآمد ماه انتخاب‌شده</h3><p>۲٫۳۴ میلیارد تومان · ۸٬۶۶۷ دلار</p><p class="note">۸٬۶۶۷ دلار</p></div><div class="card"><h3>درآمد شش‌ماهه انتخاب‌شده</h3><p>۱۰٫۹۸ میلیارد تومان · ۴۰٬۶۶۷ دلار</p><p class="note">۴۰٬۶۶۷ دلار</p></div><div class="card"><h3>نرخ</h3><p>نرخ روز ۲۷۰٬۰۰۰ تومان برای هر دلار</p><p class="note">تبدیل حسابداری، نه بازده واقعی دلاری</p></div></div>
   <p class="note">تومان تقسیم بر تومانِ هر دلار برابر دلار حسابداری است. این بازده واقعی دلاری نیست، چون نرخ در طول زمان و ارزش پایان دوره جدا مدل نشده‌اند. اگر رشد قیمت روشن باشد، فقط کمیسیون درصدی را عوض می‌کند. کمیسیون مبلغ ثابت با آن جمع نمی‌شود. افزایش قیمت موجودی خودرو سود واسطه‌گری حساب نمی‌شود.</p>
   <footer class="foot"><span>نرخ روز در فرض‌های مالی عوض می‌شود</span><span>تبدیل حسابداری است، نه بازده واقعی دلاری</span></footer>
 </section>
@@ -880,8 +1678,8 @@ button.spend:hover{border-color:var(--accent)}
   <footer class="foot"><span>حجم سالانه رقبا در اسلاید بازار حدودی است و پیوست جدا ندارد</span><span>سیستم یکپارچه معاملات خودرو</span></footer>
 </section>
 </div>
-<div id="pstage">
-<section class="slide navy" data-title="کاور پروپوزال">
+<div id="pstageBackup">
+<section class="slide navy active" data-title="کاور پروپوزال">
   <div class="kicker">طرح جامع کسب‌وکار · برنامه راهبردی · پیشنهاد مشارکت و سرمایه‌گذاری</div>
   <h1>سیستم یکپارچه معاملات خودرو</h1>
   <p class="lead">بستر خریدوفروش خودرو از ورود فروشنده تا کارشناسی، مزایده، قرارداد، تسویه و تحویل؛ برای مردم و برای شبکه نمایشگاه‌داران و دیلرها.</p>
@@ -946,14 +1744,14 @@ button.spend:hover{border-color:var(--accent)}
   <p class="kicker">داستان رشد سرمایه‌گذار</p>
   <h2>۳۰ میلیارد راه‌اندازی ۱۴۰۵، شروع مالکیت است؛ سود سالانه تنها مسیر نفع نیست</h2>
   <div class="grid g2 dense">
-    <div class="card"><span class="tag">سناریوی ورود</span><div class="figure ask">۳۰</div><span class="unit">میلیارد تومان راه‌اندازی کامل شرکت در ۱۴۰۵، به‌علاوه ۳۰ میلیارد توسعه شعبه در ۱۴۰۶، در برابر ۲۵٪</span><span class="usd block" data-m="30000"></span></div>
-    <div class="card"><span class="tag">اگر سود خالص کامل تقسیم شود</span><div class="figure">۱۰</div><span class="unit">میلیارد تومان در ماه، سهم ۲۵٪. سود تضمین‌شده یا پرداخت قطعی نیست.</span><span class="usd block" data-m="10000"></span></div>
+    <div class="card"><span class="tag">سناریوی ورود</span><div class="figure ask">۳۰</div><span class="unit">میلیارد تومان راه‌اندازی کامل شرکت در ۱۴۰۵، به‌علاوه ۳۰ میلیارد توسعه شعبه در ۱۴۰۶، در برابر ۲۵٪</span><span class="usd block" data-m="30000">۱۱۱٬۱۱۱ دلار</span></div>
+    <div class="card"><span class="tag">اگر سود خالص کامل تقسیم شود</span><div class="figure">۱۰</div><span class="unit">میلیارد تومان در ماه، سهم ۲۵٪. سود تضمین‌شده یا پرداخت قطعی نیست.</span><span class="usd block" data-m="10000">۳۷٬۰۳۷ دلار</span></div>
   </div>
   <div class="grid g4 dense">
     <div class="card"><span class="tag">پایان سال چهارم</span><div class="figure">۳۰</div><span class="unit">شعبه فعال. سناریوی هدف است.</span></div>
     <div class="card"><span class="tag">ظرفیت هدف</span><div class="figure">۲٬۰۰۰</div><span class="unit">معامله در ماه. فروش تحقق‌یافته نیست.</span></div>
-    <div class="card"><span class="tag">فرض اولیه</span><div class="figure">۴۰</div><span class="unit">میلیارد تومان سود خالص ماهانه. مشروط به اثبات هزینه‌ها.</span><span class="usd block" data-m="40000"></span></div>
-    <div class="card"><span class="tag">ارزش‌گذاری هدف</span><div class="figure">۴</div><span class="unit">همت برای شرکت. نتیجه تضمین‌شده نیست.</span><span class="usd block" data-m="4000000"></span></div>
+    <div class="card"><span class="tag">فرض اولیه</span><div class="figure">۴۰</div><span class="unit">میلیارد تومان سود خالص ماهانه. مشروط به اثبات هزینه‌ها.</span><span class="usd block" data-m="40000">۱۴۸٬۱۴۸ دلار</span></div>
+    <div class="card"><span class="tag">ارزش‌گذاری هدف</span><div class="figure">۴</div><span class="unit">همت برای شرکت. نتیجه تضمین‌شده نیست.</span><span class="usd block" data-m="4000000">۱۴٬۸۱۴٬۸۱۵ دلار</span></div>
   </div>
   <p class="note">۴۰ میلیارد یعنی ۱۰۰ میلیارد کمیسیون ناخالص منهای ۶۰ میلیارد هزینه کامل اعلام‌شده تیم. ۴ همت از همین فرض‌های این پروپوزال استخراج شده و ارزش‌گذاری شخص ثالث نیست. اگر سود کامل تقسیم شود، ۲۵٪ آن ۱۰ میلیارد تومان در ماه است و تضمین نیست. مالکیت ۲۵٪ شرکت و برند، جدا از سود سهام است.</p>
   <footer class="foot"><span>سود سهام و رشد ارزش دارایی دو مسیر جدا هستند</span><span>هیچ‌کدام تضمین نیست</span></footer>
@@ -1756,7 +2554,8 @@ button.spend:hover{border-color:var(--accent)}
       return "<tr><td>" + row[0] + "</td><td>" + money(row[1]) + "</td><td>" + row[2] + "</td><td>" + row[3] + "</td></tr>";
     }).join("") + "<tr><td>توسعه شعبه ۱۴۰۶</td><td>" + money(branchCheck) + "</td><td>سال ۱۴۰۶</td><td>تا پایان ۱۴۰۶ جمع شعب ۱۰ می‌شود. ریز این ۳۰ میلیارد جدا ساخته نشده. از ۱۴۰۷ شعبه جدید از درآمد سیستم است.</td></tr>";
     document.getElementById("useNote").textContent = "جمع پنج سرفصل راه‌اندازی " + money(plan.sum) + " است. " + (gap >= 0 ? "باقی ۳۰ میلیارد ۱۴۰۵، " + money(gap) + "، تخصیص داده نشده و برایش مصرفی ساخته نشده." : "این پنج سرفصل از ۳۰ میلیارد راه‌اندازی بیشتر است: " + money(-gap) + ".") + " ۳۰ میلیارد ۱۴۰۶ برای توسعه شعبه تا جمع ۱۰ شعبه است. پیش داخل سرفصل دفتر است و هزینه مصرف‌شده نیست.";
-    document.getElementById("roundValue").textContent = money(launchCheck) + " در ۱۴۰۵ و " + money(branchCheck) + " در ۱۴۰۶ به حساب شرکت و از راه افزایش سرمایه می‌آید. قیمت پس از پول " + money(postMoney) + " و پیش از پول " + money(preMoney) + " است. ارزش ۲۵٪ در این قیمت برابر جمع ۶۰ میلیارد است.";
+    var roundValue = document.getElementById("roundValue");
+    if (roundValue) roundValue.textContent = money(launchCheck) + " در ۱۴۰۵ و " + money(branchCheck) + " در ۱۴۰۶ به حساب شرکت و از راه افزایش سرمایه می‌آید. قیمت پس از پول " + money(postMoney) + " و پیش از پول " + money(preMoney) + " است. ارزش ۲۵٪ در این قیمت برابر جمع ۶۰ میلیارد است.";
     document.getElementById("targetValue").textContent = "۴ همت از بخش پروپوزال همین سند استخراج شده است: داستان رشد، با ۳۰ شعبه، ۲٬۰۰۰ معامله ماهانه و سود خالص ۴۰ میلیارد. ۴۰ میلیارد در سال ۴۸۰ میلیارد می‌شود و ۴ همت حدود ۸٫۳ برابر آن سود سالانه است. این نسبت ارزش‌گذاری شخص ثالث نیست.";
     document.getElementById("methodEbitda").textContent = "سود خالص ۴۰ میلیارد، ۱۰۰ منهای ۶۰ میلیارد هزینه کامل اعلام‌شده تیم است و مالیات را هم در بر می‌گیرد. مانده عملیاتی این مدل، هزینه مقایسه‌ای راه‌اندازی است و با آن ۴۰ یکی نیست.";
     var mixes = [
@@ -1867,11 +2666,28 @@ button.spend:hover{border-color:var(--accent)}
   }
   var slides = Array.prototype.slice.call(document.querySelectorAll("#stage > .slide"));
   var pslides = Array.prototype.slice.call(document.querySelectorAll("#pstage > .slide"));
+  var bSlides = Array.prototype.slice.call(document.querySelectorAll("#stageBackup > .slide"));
+  var bpSlides = Array.prototype.slice.call(document.querySelectorAll("#pstageBackup > .slide"));
   var index = 0;
   var pindex = 0;
+  var bIndex = 0;
+  var bpIndex = 0;
   function deckMode() { return document.body.dataset.view === "proposal"; }
-  function activeList() { return deckMode() ? pslides : slides; }
-  function activeIndex() { return deckMode() ? pindex : index; }
+  function backupView() {
+    return document.body.dataset.view === "deck-backup" || document.body.dataset.view === "proposal-backup";
+  }
+  function activeList() {
+    if (document.body.dataset.view === "proposal") return pslides;
+    if (document.body.dataset.view === "proposal-backup") return bpSlides;
+    if (document.body.dataset.view === "deck-backup") return bSlides;
+    return slides;
+  }
+  function activeIndex() {
+    if (document.body.dataset.view === "proposal") return pindex;
+    if (document.body.dataset.view === "proposal-backup") return bpIndex;
+    if (document.body.dataset.view === "deck-backup") return bIndex;
+    return index;
+  }
   function paintChrome(list, i) {
     document.getElementById("counter").textContent = fa(i + 1, 0) + " / " + fa(list.length, 0);
     document.getElementById("now").textContent = fa(i + 1, 0) + "  ·  " + list[i].getAttribute("data-title");
@@ -1893,8 +2709,20 @@ button.spend:hover{border-color:var(--accent)}
     });
     if (deckMode()) paintChrome(pslides, pindex);
   }
+  function showBackup(i) {
+    var list = activeList();
+    var n = Math.max(0, Math.min(list.length - 1, i));
+    if (document.body.dataset.view === "proposal-backup") bpIndex = n;
+    else bIndex = n;
+    list.forEach(function (slide, k) {
+      slide.classList.toggle("active", k === n);
+      if (k === n) slide.scrollTop = 0;
+    });
+    paintChrome(list, n);
+  }
   function showActive(i) {
     if (deckMode()) showProposal(i);
+    else if (backupView()) showBackup(i);
     else show(i);
   }
   function fit() {
@@ -2044,13 +2872,16 @@ button.spend:hover{border-color:var(--accent)}
     closeLead();
     if (name === "deck") show(index);
     else if (name === "proposal") showProposal(pindex);
-    else document.getElementById("now").textContent = name === "menu" ? "منو" : (name === "horizon" ? "افق درآمدزایی" : "نمای مالی");
+    else if (name === "deck-backup" || name === "proposal-backup") showBackup(name === "proposal-backup" ? bpIndex : bIndex);
+    else document.getElementById("now").textContent = name === "menu" ? "منو" : (name === "history" ? "تاریخچه" : (name === "horizon" ? "افق درآمدزایی" : "نمای مالی"));
   }
   document.body.addEventListener("click", function (event) {
     var btn = event.target.closest("[data-open]");
     if (!btn) return;
     if (btn.getAttribute("data-open") === "deck") index = 0;
     if (btn.getAttribute("data-open") === "proposal") pindex = 0;
+    if (btn.getAttribute("data-open") === "deck-backup") bIndex = 0;
+    if (btn.getAttribute("data-open") === "proposal-backup") bpIndex = 0;
     setView(btn.getAttribute("data-open"));
   });
   document.getElementById("finance").addEventListener("input", function (event) {
@@ -2088,7 +2919,7 @@ button.spend:hover{border-color:var(--accent)}
     if (event.key === "Escape" && document.getElementById("spendModal").classList.contains("open")) { closeSpend(); return; }
     if (event.target.matches("input,select,textarea")) return;
     if ((event.key === "f" || event.key === "F") && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); toggleFull(); }
-    if (document.body.dataset.view !== "deck" && document.body.dataset.view !== "proposal") {
+    if (document.body.dataset.view !== "deck" && document.body.dataset.view !== "proposal" && !backupView()) {
       if (event.key === "Escape" && document.body.dataset.view !== "menu") setView("menu");
       return;
     }
