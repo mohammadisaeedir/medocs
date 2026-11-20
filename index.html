@@ -260,9 +260,13 @@ body[data-view="menu"] #home,body[data-view="menu"] #now,body[data-view="finance
 #financeOut{display:grid;gap:14px}
 button.spend{width:100%;font:inherit;text-align:right;cursor:pointer}
 button.spend:hover{border-color:var(--accent)}
-#spendModal{position:fixed;inset:0;z-index:50;display:none;background:rgba(4,8,12,.82);align-items:center;justify-content:center;padding:16px}
-#spendModal.open{display:flex}
-#spendModal .sheet{width:min(980px,100%);max-width:100%;min-width:0}
+#spendModal,#leadModal{position:fixed;inset:0;z-index:50;display:none;background:rgba(4,8,12,.82);align-items:center;justify-content:center;padding:16px}
+#spendModal.open,#leadModal.open{display:flex}
+#spendModal .sheet,#leadModal .sheet{width:min(980px,100%);max-width:100%;min-width:0}
+#leadModal [data-lead-period][aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+#leadModal .figure{font-size:22px;overflow-wrap:anywhere}
+.lead-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+@media (max-width:760px){.lead-kpis{grid-template-columns:1fr}}
 .svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{background:var(--page);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;line-height:1.45}
@@ -317,6 +321,7 @@ button.spend:hover{border-color:var(--accent)}
   <p class="kicker">افق بعدی · سوپراپ یا سوپرسایت</p>
   <h2>خدماتی که بعداً می‌توانند کنار معامله پول بسازند</h2>
   <p class="note">این صفحه محصول همین سرمایه‌گذاری نیست. فهرست از ماتریس کشف سوپراپ آمده است. هر دسته یک مسیر درآمد است: کارمزد، کمیسیون یا حاشیه فروش. عدد درآمد این خدمات در این طرح نیست. برچسب رنگی همان خدمات محصول هدف خودرو۴۵ است و بقیه افق بازتر سوپراپ یا سوپرسایت‌اند.</p>
+  <button type="button" class="card spend" id="openLead"><span class="tag">تابلو رهبری</span><h3>نبض تراکنش و درآمد خدمات</h3><span class="unit">امروز و این ماه، به ریال. برای دیدن جزئیات کلیک کنید.</span></button>
   <div class="svc-grid">
 <div class="card"><span class="tag">کارمزد استعلام و پرداخت</span><h3>خلافی و استعلام</h3><div class="chips"><span>خلافی / استعلام خلافی خودرو</span><span>خلافی موتور</span><span>مشاهده عکس خلافی</span><span>نمره منفی</span></div></div>
 <div class="card"><span class="tag">کارمزد پرداخت عوارض</span><h3>عوارض و طرح ترافیک</h3><div class="chips"><span>عوارض آزادراهی</span><span>عوارض سالانه / سالیانه</span><span>طرح ترافیک</span><span>پارک حاشیه‌ای الیت مشهد</span><span>اشتراک اطلاع‌رسانی</span></div></div>
@@ -334,7 +339,29 @@ button.spend:hover{border-color:var(--accent)}
 <div class="card"><span class="tag">کمیسیون معامله و قرارداد</span><h3>خرید و فروش</h3><div class="chips"><span>قیمت خودرو فرسوده</span><span>فروش فوری خودرو</span><span>قولنامه‌نویس آنلاین</span><span>قیمت روز خودرو</span><span>مشاوره خرید خودرو</span></div></div>
 <div class="card"><span class="tag">حاشیه فروش قطعه</span><h3>قطعات و لوازم</h3><div class="chips"><span>خرید باتری</span><span>لاستیک خودرو</span><span>قطعات خودرو</span><span>لاستیک دولتی</span><span>روغن و فیلتر</span></div></div>
 <div class="card"><span class="tag">کارمزد و کمیسیون خدمات موتور</span><h3>خدمات موتور</h3><div class="chips"><span>بیمه شخص ثالث موتور</span><span>قطعات موتورسیکلت</span></div></div>
-<div class="card"><span class="tag">کارمزد اعزام</span><h3>خدمات امدادی</h3><div class="chips"><span>مکانیکی (امداد)</span><span>تعویض شیشه و آینه (امداد)</span><span>سوخت‌رسانی (امداد)</span></div></div>
+    <div class="card"><span class="tag">کارمزد اعزام</span><h3>خدمات امدادی</h3><div class="chips"><span>مکانیکی (امداد)</span><span>تعویض شیشه و آینه (امداد)</span><span>سوخت‌رسانی (امداد)</span></div></div>
+  </div>
+  <div id="leadModal">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+      <div class="sheet-head">
+        <h3 id="leadTitle">تابلو رهبری سوپراپ خدمات خودرو</h3>
+        <button type="button" id="closeLead">بستن</button>
+      </div>
+      <div class="sheet-tools">
+        <button type="button" data-lead-period="day" aria-pressed="true">امروز</button>
+        <button type="button" data-lead-period="month" aria-pressed="false">این ماه</button>
+      </div>
+      <div class="lead-kpis">
+        <div class="card"><span class="tag">تراکنش</span><div class="figure" id="leadTx">—</div><span class="unit" id="leadHint"></span></div>
+        <div class="card"><span class="tag">درآمد ناخالص</span><div class="figure" id="leadRev" style="font-size:28px">—</div><span class="unit">ریال</span></div>
+        <div class="card"><span class="tag">همان مبلغ به تومان</span><div class="figure" id="leadToman" style="font-size:28px">—</div><span class="unit">فقط تبدیل ریال تقسیم بر ۱۰</span></div>
+      </div>
+      <table>
+        <thead><tr><th>خدمت</th><th>تراکنش</th><th>درآمد، ریال</th><th>تومان</th></tr></thead>
+        <tbody id="leadBody"></tbody>
+      </table>
+      <p class="note">اعداد از تابلو رهبری سوپراپ است و درآمد محقق‌شده این طرح نیست. واحد اصلی ریال است.</p>
+    </div>
   </div>
 </section>
 <section id="finance" class="gate">
@@ -1989,11 +2016,43 @@ button.spend:hover{border-color:var(--accent)}
     render();
   }
   document.getElementById("panel").addEventListener("input", onModelInput);
+  var leadPeriod = "day";
+  var leadServices = [
+    { nameFa: "استعلام خلافی", day: { transactions: 6925, revenue: 165981401 }, month: { transactions: 236406, revenue: 4727270529 } },
+    { nameFa: "استعلام گواهینامه", day: { transactions: 4766, revenue: 114241562 }, month: { transactions: 162714, revenue: 3253682457 } },
+    { nameFa: "استعلام کارت و سند خودرو", day: { transactions: 3696, revenue: 132867904 }, month: { transactions: 126162, revenue: 3784174164 } },
+    { nameFa: "استعلام پلاک", day: { transactions: 10172, revenue: 121899058 }, month: { transactions: 347241, revenue: 3471773493 } },
+    { nameFa: "استعلام تاریخچه پلاک", day: { transactions: 2970, revenue: 177985043 }, month: { transactions: 101400, revenue: 5069142960 } },
+    { nameFa: "مشاهده عکس خلافی", day: { transactions: 4283, revenue: 256629597 }, month: { transactions: 146205, revenue: 7308996828 } },
+    { nameFa: "طرح ترافیک", day: { transactions: 11312, revenue: 361489003 }, month: { transactions: 386151, revenue: 10295468649 } },
+    { nameFa: "عوارض سالانه", day: { transactions: 2037, revenue: 407296007 }, month: { transactions: 69564, revenue: 11600085288 } },
+    { nameFa: "پارک حاشیه‌ای الیت مشهد", day: { transactions: 8842, revenue: 282568503 }, month: { transactions: 301845, revenue: 8047755648 } },
+    { nameFa: "عوارض آزادراهی", day: { transactions: 14997, revenue: 479041922 }, month: { transactions: 511737, revenue: 13643460759 } }
+  ];
+  function paintLead() {
+    var rows = leadServices.map(function (s) {
+      return { name: s.nameFa, tx: s[leadPeriod].transactions, rev: s[leadPeriod].revenue };
+    }).sort(function (a, b) { return b.rev - a.rev; });
+    var tx = 0, rev = 0;
+    rows.forEach(function (r) { tx += r.tx; rev += r.rev; });
+    document.getElementById("leadTx").textContent = fa(tx, 0);
+    document.getElementById("leadRev").textContent = fa(rev, 0);
+    document.getElementById("leadToman").textContent = fa(Math.round(rev / 10), 0);
+    document.getElementById("leadHint").textContent = leadPeriod === "day" ? "امروز · همه سرویس‌ها" : "این ماه · همه سرویس‌ها";
+    document.getElementById("leadBody").innerHTML = rows.map(function (r) {
+      return "<tr><td>" + r.name + "</td><td>" + fa(r.tx, 0) + "</td><td>" + fa(r.rev, 0) + "</td><td>" + fa(Math.round(r.rev / 10), 0) + "</td></tr>";
+    }).join("") + "<tr><td>جمع</td><td>" + fa(tx, 0) + "</td><td>" + fa(rev, 0) + "</td><td>" + fa(Math.round(rev / 10), 0) + "</td></tr>";
+    document.querySelectorAll("#leadModal [data-lead-period]").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", btn.getAttribute("data-lead-period") === leadPeriod ? "true" : "false");
+    });
+  }
+  function closeLead() { document.getElementById("leadModal").classList.remove("open"); }
   function setView(name) {
     document.body.dataset.view = name;
     document.body.classList.remove("overview");
     document.getElementById("panel").classList.remove("open");
     document.getElementById("spendModal").classList.remove("open");
+    closeLead();
     if (name === "deck") show(index);
     else if (name === "proposal") showProposal(pindex);
     else document.getElementById("now").textContent = name === "menu" ? "منو" : (name === "horizon" ? "افق درآمدزایی" : "نمای مالی");
@@ -2011,6 +2070,18 @@ button.spend:hover{border-color:var(--accent)}
     render();
   });
   function closeSpend() { document.getElementById("spendModal").classList.remove("open"); }
+  document.getElementById("horizon").addEventListener("click", function (event) {
+    if (event.target.closest("#openLead")) {
+      paintLead();
+      document.getElementById("leadModal").classList.add("open");
+      return;
+    }
+    if (event.target.id === "closeLead" || event.target.id === "leadModal") { closeLead(); return; }
+    var periodBtn = event.target.closest("[data-lead-period]");
+    if (!periodBtn) return;
+    leadPeriod = periodBtn.getAttribute("data-lead-period");
+    paintLead();
+  });
   document.getElementById("finance").addEventListener("click", function (event) {
     if (event.target.closest("#openSpend")) {
       document.getElementById("spendModal").classList.add("open");
@@ -2024,6 +2095,7 @@ button.spend:hover{border-color:var(--accent)}
     render();
   });
   document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && document.getElementById("leadModal").classList.contains("open")) { closeLead(); return; }
     if (event.key === "Escape" && document.getElementById("spendModal").classList.contains("open")) { closeSpend(); return; }
     if (event.target.matches("input,select,textarea")) return;
     if ((event.key === "f" || event.key === "F") && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); toggleFull(); }
