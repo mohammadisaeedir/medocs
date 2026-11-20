@@ -270,7 +270,6 @@ button.spend:hover{border-color:var(--accent)}
 .svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{background:var(--page);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;line-height:1.45}
-.chips span.here{border-color:var(--accent);color:var(--accent)}
 @media (max-width:1100px){.menu-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.menu-grid,.svc-grid{grid-template-columns:1fr}.gate{padding:16px}}
 @media print{
@@ -320,20 +319,17 @@ button.spend:hover{border-color:var(--accent)}
 <section id="horizon" class="gate">
   <p class="kicker">افق بعدی · سوپراپ یا سوپرسایت</p>
   <h2>خدماتی که بعداً می‌توانند کنار معامله پول بسازند</h2>
-  <p class="note">این صفحه محصول همین سرمایه‌گذاری نیست. فهرست از ماتریس کشف سوپراپ آمده است. هر دسته یک مسیر درآمد است: کارمزد، کمیسیون یا حاشیه فروش. عدد درآمد این خدمات در این طرح نیست. برچسب رنگی همان خدمات محصول هدف خودرو۴۵ است و بقیه افق بازتر سوپراپ یا سوپرسایت‌اند.</p>
+  <p class="note">این صفحه محصول همین سرمایه‌گذاری نیست. فهرست از ماتریس کشف سوپراپ آمده است. هر دسته یک مسیر درآمد است: کارمزد، کمیسیون یا حاشیه فروش. عدد درآمد این خدمات در این طرح نیست.</p>
   <button type="button" class="card spend" id="openLead"><span class="tag">تابلو رهبری</span><h3>نبض تراکنش و درآمد خدمات</h3><span class="unit">امروز و این ماه، به ریال. برای دیدن جزئیات کلیک کنید.</span></button>
   <div class="svc-grid">
-<div class="card"><span class="tag">کارمزد استعلام و پرداخت</span><h3>خلافی و استعلام</h3><div class="chips"><span>خلافی / استعلام خلافی خودرو</span><span>خلافی موتور</span><span>مشاهده عکس خلافی</span><span>نمره منفی</span></div></div>
-<div class="card"><span class="tag">کارمزد پرداخت عوارض</span><h3>عوارض و طرح ترافیک</h3><div class="chips"><span>عوارض آزادراهی</span><span>عوارض سالانه / سالیانه</span><span>طرح ترافیک</span><span>پارک حاشیه‌ای تهران</span><span>اشتراک اطلاع‌رسانی</span></div></div>
-<div class="card"><span class="tag">کارمزد استعلام مدرک</span><h3>پلاک و مدارک</h3><div class="chips"><span>پلاک‌های فعال</span><span>استعلام پلاک</span><span>تاریخچه / استعلام تاریخچه پلاک</span><span>مدارک / کارت و سند خودرو</span><span>مدیریت پلاک‌ها</span></div></div>
-<div class="card"><span class="tag">کارمزد استعلام سابقه</span><h3>گواهینامه و سوابق</h3><div class="chips"><span>وضعیت / استعلام گواهینامه</span><span>استعلام سوابق خودرو</span><span>استعلام معاینه فنی</span></div></div>
+<div class="card"><span class="tag">کارمزد استعلام و پرداخت</span><h3>خلافی و استعلام</h3><div class="chips"><span>خلافی / استعلام خلافی خودرو</span><span>خلافی موتور</span><span>مشاهده عکس خلافی</span></div></div>
+<div class="card"><span class="tag">کارمزد پرداخت عوارض</span><h3>عوارض و طرح ترافیک</h3><div class="chips"><span>عوارض آزادراهی</span><span>عوارض سالانه</span><span>طرح ترافیک</span><span>پارک حاشیه‌ای تهران</span><span>اشتراک اطلاع‌رسانی</span></div></div>
+<div class="card"><span class="tag">کارمزد استعلام مدرک</span><h3>پلاک و مدارک</h3><div class="chips"><span>استعلام پلاک</span><span>استعلام تاریخچه پلاک</span><span>استعلام کارت و سند خودرو</span><span>مدیریت پلاک‌ها</span></div></div>
+<div class="card"><span class="tag">کارمزد استعلام سابقه</span><h3>گواهینامه و سوابق</h3><div class="chips"><span>استعلام گواهینامه</span><span>استعلام نمره منفی گواهینامه</span><span>استعلام سوابق خودرو</span><span>استعلام معاینه فنی</span></div></div>
 <div class="card"><span class="tag">کمیسیون صدور و تمدید</span><h3>بیمه</h3><div class="chips"><span>بیمه / استعلام بیمه شخص ثالث</span><span>بیمه بدنه</span><span>پرداخت اقساط بیمه</span><span>بیمه شخص ثالث قسطی</span></div></div>
 <div class="card"><span class="tag">نگهداشت کاربر برای خدمات پولی</span><h3>مدیریت خودرو</h3><div class="chips"><span>افزودن وسیله نقلیه</span><span>پرداخت خودکار</span></div></div>
 <div class="card"><span class="tag">کارمزد محاسبه و پرداخت</span><h3>مالیات و معاملات</h3><div class="chips"><span>مالیات انتقال خودرو</span><span>مالیات انتقال موتور</span><span>معاملات خودرو</span></div></div>
-<div class="card"><span class="tag">کمیسیون معامله و همکاری در فروش</span><h3>فروش و همکاری</h3><div class="chips"><span class="here">کسب درآمد از همکاری در فروش</span><span class="here">فروش خودرو</span><span class="here">معاوضه خودرو</span></div></div>
-<div class="card"><span class="tag">جذب کاربر به معامله</span><h3>قیمت و ارزیابی</h3><div class="chips"><span class="here">قیمت روز خودرو</span><span class="here">تخمین قیمت خودرو</span></div></div>
-<div class="card"><span class="tag">کمیسیون خرید</span><h3>خرید خودرو</h3><div class="chips"><span class="here">خرید خودرو (آگهی)</span><span class="here">خرید سفارشی خودرو</span><span class="here">خرید خودرو کارکرده</span><span class="here">خرید خودرو صفر</span><span class="here">خرید خودرو اقساطی</span></div></div>
-<div class="card"><span class="tag">حاشیه فروش یدک، سرویس و حمل</span><h3>سرویس‌های جانبی</h3><div class="chips"><span class="here">مارکت پلیس لوازم یدکی خودرو</span><span class="here">مارکت پلیس سرویس های خودرویی مثل اسنپ کارفیکس</span><span class="here">حمل و نقل خودرو کشوری</span></div></div>
+<div class="card"><span class="tag">حاشیه فروش یدک، سرویس و حمل</span><h3>سرویس‌های جانبی</h3><div class="chips"><span>مارکت پلیس لوازم یدکی خودرو</span><span>مارکت پلیس سرویس های خودرویی مثل اسنپ کارفیکس</span><span>حمل و نقل خودرو کشوری</span></div></div>
 <div class="card"><span class="tag">کمیسیون سفارش خدمت</span><h3>تعمیر و نگهداری</h3><div class="chips"><span>تعویض روغن</span><span>کارواش</span><span>تعمیر خودرو در محل</span><span>معاینه فنی</span><span>تعویض باتری</span><span>پنچرگیری</span><span>رزرو معاینه فنی</span><span>حمل خودرو</span><span>کارشناسی خودرو</span></div></div>
 <div class="card"><span class="tag">کمیسیون معامله و قرارداد</span><h3>خرید و فروش</h3><div class="chips"><span>قیمت خودرو فرسوده</span><span>فروش فوری خودرو</span><span>قولنامه‌نویس آنلاین</span><span>قیمت روز خودرو</span><span>مشاوره خرید خودرو</span></div></div>
 <div class="card"><span class="tag">حاشیه فروش قطعه</span><h3>قطعات و لوازم</h3><div class="chips"><span>خرید باتری</span><span>لاستیک خودرو</span><span>قطعات خودرو</span><span>لاستیک دولتی</span><span>روغن و فیلتر</span></div></div>
@@ -623,13 +619,12 @@ button.spend:hover{border-color:var(--accent)}
   <table style="margin-top:8px">
     <thead><tr><th>بازیگر</th><th>جذب</th><th>کارشناسی</th><th>معامله</th><th>حضور فیزیکی</th></tr></thead>
     <tbody>
-      <tr><td>خودرو۴۵</td><td>۵۰٪ از درخواست فروش، رزرو و جذب</td><td>۵۰٪ از رزروها</td><td>حدود ۷۰ تا ۷۵ هزار امسال</td><td>دارد</td></tr>
       <tr><td>همراه مکانیک</td><td>۵۰٪ از درخواست فروش، رزرو و جذب</td><td>۵۰٪ از رزروها</td><td>حدود ۴۰ هزار در سال</td><td>دارد</td></tr>
       <tr><td>دیوار</td><td>روزانه ۸ تا ۱۰ هزار آگهی خودرو، شامل تکراری</td><td>داده دقیق نیست</td><td>داده دقیق معامله نیست</td><td>دارد</td></tr>
       <tr><td>سایر پلتفرم‌ها و نمایشگاه‌های آفلاین</td><td>باقی بازار</td><td>در آفلاین نامتجانس</td><td>باقی‌مانده بازار</td><td>دارد</td></tr>
     </tbody>
   </table>
-  <p class="note">در خودرو۴۵ و همراه مکانیک روزانه نزدیک ۲۰ هزار درخواست فروش می‌آید. معمولاً ۵۰٪ رزرو و جذب می‌شود، ۵۰٪ از رزروها کارشناسی می‌شود و ۳۰٪ از کارشناسی‌شده‌ها معامله می‌شود. سود معامله خودرو معمولاً ۲ تا ۴ درصد قیمت است؛ خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان. سود تسهیلات موضوع جداست: کارنامه پارسال حدود ۱۰۰ میلیارد تومان<span class="usd" data-m="100000"></span> سود فقط از اعطای تسهیلات خودرو داشته و این رقم تعداد معامله نیست. تا ۱۴۰۳ فاصله تعویض خودرو حدود ۵ سال بوده و به‌تدریج به سمت ۳ سال می‌رود، چون خودرو در ایران ماهیت سرمایه‌گذاری دارد. برای حدود ۶۰٪ مردم، دارایی اصلی اول خودرو است، نه ملک.</p>
+  <p class="note">در نمونه‌های فعال این بازار روزانه نزدیک ۲۰ هزار درخواست فروش می‌آید. معمولاً ۵۰٪ رزرو و جذب می‌شود، ۵۰٪ از رزروها کارشناسی می‌شود و ۳۰٪ از کارشناسی‌شده‌ها معامله می‌شود. سود معامله خودرو معمولاً ۲ تا ۴ درصد قیمت است؛ خودروی ۴ میلیارد تومانی با ۲٪ می‌شود ۸۰ میلیون تومان. سود تسهیلات موضوع جداست: کارنامه پارسال حدود ۱۰۰ میلیارد تومان<span class="usd" data-m="100000"></span> سود فقط از اعطای تسهیلات خودرو داشته و این رقم تعداد معامله نیست. تا ۱۴۰۳ فاصله تعویض خودرو حدود ۵ سال بوده و به‌تدریج به سمت ۳ سال می‌رود، چون خودرو در ایران ماهیت سرمایه‌گذاری دارد. برای حدود ۶۰٪ مردم، دارایی اصلی اول خودرو است، نه ملک.</p>
   <footer class="foot"><span>حجم رقبا حدودی است</span><span></span></footer>
 </section>
 
@@ -767,7 +762,7 @@ button.spend:hover{border-color:var(--accent)}
     <div class="card"><h3>سود عملیاتی</h3><p id="methodEbitda"></p></div>
     <div class="card"><h3>درآمد تکرارشونده</h3><p>در مدل پایه درآمد خدمات صفر است. کمیسیون هر معامله، اشتراک ماهانه نیست.</p></div>
     <div class="card"><h3>رشد شبکه</h3><p>جدول چهارساله سناریوی پیشنهادی است. شمار شعبه به‌تنهایی ارزش قطعی نمی‌سازد.</p></div>
-    <div class="card"><h3>شرکت‌های مشابه</h3><p>معامله واقعی بازار برای ارزش‌گذاری در این طرح نیست. حجم خودرو۴۵ و همراه مکانیک، مضرب ارزش نیست.</p></div>
+    <div class="card"><h3>شرکت‌های مشابه</h3><p>معامله واقعی بازار برای ارزش‌گذاری در این طرح نیست. حجم همراه مکانیک، مضرب ارزش نیست.</p></div>
   </div>
   <footer class="foot"><span>سناریوی ارزش‌گذاری هدف</span><span>نتیجه تضمین‌شده نیست</span></footer>
 </section>
@@ -1099,9 +1094,8 @@ button.spend:hover{border-color:var(--accent)}
 
 <section class="slide" data-title="اندازه بازار و رقبا">
   <h2>بخش بزرگ بازار هنوز خارج از مدل‌های سازمان‌یافته است</h2>
-  <div class="grid g4">
+  <div class="grid g3">
     <div class="card"><span class="tag">تعویض پلاک ناجا</span><div class="figure">۵ میلیون</div><span class="unit">معامله سالانه خودرو. ناوگان حدود ۲۵ میلیون سواری است و همه معامله نمی‌شوند</span></div>
-    <div class="card"><span class="tag">خودرو۴۵</span><div class="figure">۷۰–۷۵</div><span class="unit">هزار معامله امسال، حدود ۱٫۵٪ از ۵ میلیون</span></div>
     <div class="card"><span class="tag">سایر بازیگران</span><div class="figure">۲٪</div><span class="unit">همراه مکانیک و مجموعه‌های مشابه، روی هم. سود تسهیلات کارنامه جداست</span></div>
     <div class="card pick"><span class="tag">خارج از پوشش مؤثر</span><div class="figure">۹۵٪+</div><span class="unit">هنوز با روش سنتی و پراکنده معامله می‌شود</span></div>
   </div>
