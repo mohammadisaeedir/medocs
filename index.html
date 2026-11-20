@@ -203,7 +203,7 @@ th{color:var(--muted);font-weight:400}
   .figure{font-size:32px}
   .note,footer.foot,table{font-size:14px}
   .g2,.g3,.g4,.values ol,.split,.flow,.flow.next{grid-template-columns:1fr}
-  .grid > *,.sides > *,.split > *,.flow li,.flow b,.flow span{min-width:0}
+  .grid > *,.sides > *,.split > *,.flow li,.flow b,.flow span,.svc-grid > *{min-width:0}
   .flow b,.flow span:not(.n),footer.foot span{overflow-wrap:anywhere}
   .flow li::after{display:none}
   .cost-lines label{grid-template-columns:minmax(0,1fr) 76px}
@@ -239,16 +239,16 @@ body.overview #overview-board{display:grid}
 .gate h1,.gate h2{margin:0;font-weight:700;line-height:1.2}
 .gate h1{font-size:40px}
 .gate h2{font-size:28px}
-body[data-view="menu"] #menu,body[data-view="finance"] #finance{display:flex;flex-direction:column;gap:16px}
+body[data-view="menu"] #menu,body[data-view="finance"] #finance,body[data-view="horizon"] #horizon{display:flex;flex-direction:column;gap:16px}
 body[data-view="menu"] #menu{justify-content:safe center}
-body[data-view="menu"] #stage,body[data-view="menu"] #pstage,body[data-view="menu"] .dock,body[data-view="proposal"] #stage,body[data-view="proposal"] #proposal,body[data-view="finance"] #stage,body[data-view="finance"] #pstage,body[data-view="finance"] .dock,body[data-view="deck"] #pstage{display:none !important}
+body[data-view="menu"] #stage,body[data-view="menu"] #pstage,body[data-view="menu"] .dock,body[data-view="proposal"] #stage,body[data-view="proposal"] #proposal,body[data-view="finance"] #stage,body[data-view="finance"] #pstage,body[data-view="finance"] .dock,body[data-view="horizon"] #stage,body[data-view="horizon"] #pstage,body[data-view="horizon"] .dock,body[data-view="deck"] #pstage{display:none !important}
 body[data-view="proposal"] #pstage{display:block !important}
 body[data-view="proposal"] .dock{display:flex !important}
 body.overview #pstage{display:none !important}
 body:not([data-view="deck"]):not([data-view="proposal"]) #overview,body:not([data-view="deck"]):not([data-view="proposal"]) #pdf{display:none}
 body:not([data-view="deck"]) #assumptions{display:none}
-body[data-view="menu"] #home,body[data-view="menu"] #now,body[data-view="finance"] #now{display:none}
-.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+body[data-view="menu"] #home,body[data-view="menu"] #now,body[data-view="finance"] #now,body[data-view="horizon"] #now{display:none}
+.menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .menu-grid button,.back{text-align:right;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:28px 22px;cursor:pointer;font:inherit}
 .menu-grid button{display:grid;gap:8px;align-content:start}
 .menu-art{width:100%;height:168px;object-fit:contain;object-position:center;display:block}
@@ -263,7 +263,12 @@ button.spend:hover{border-color:var(--accent)}
 #spendModal{position:fixed;inset:0;z-index:50;display:none;background:rgba(4,8,12,.82);align-items:center;justify-content:center;padding:16px}
 #spendModal.open{display:flex}
 #spendModal .sheet{width:min(980px,100%);max-width:100%;min-width:0}
-@media (max-width:760px){.menu-grid{grid-template-columns:1fr}.gate{padding:16px}}
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{background:var(--page);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;line-height:1.45}
+.chips span.here{border-color:var(--accent);color:var(--accent)}
+@media (max-width:1100px){.menu-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.menu-grid,.svc-grid{grid-template-columns:1fr}.gate{padding:16px}}
 @media print{
   @page{size:338.67mm 190.5mm;margin:0}
   html,body{background:var(--bg);-webkit-print-color-adjust:exact;print-color-adjust:exact;overflow:visible}
@@ -305,6 +310,31 @@ button.spend:hover{border-color:var(--accent)}
     <button type="button" data-open="proposal"><img class="menu-art" src="art/menu-proposal.png" alt=""><span class="idx">۱</span><b>پروپوزال طرح جامع کسب‌وکار</b></button>
     <button type="button" data-open="deck"><img class="menu-art" src="art/menu-investment.png" alt=""><span class="idx">۲</span><b>طرح سرمایه‌گذاری خصوصی</b></button>
     <button type="button" data-open="finance"><img class="menu-art" src="art/menu-finance.png" alt=""><span class="idx">۳</span><b>نمای مالی و درآمدی</b></button>
+    <button type="button" data-open="horizon"><img class="menu-art" src="art/menu-horizon.png" alt=""><span class="idx">۴</span><b>افق درآمدزایی</b></button>
+  </div>
+</section>
+<section id="horizon" class="gate">
+  <p class="kicker">افق بعدی · سوپراپ یا سوپرسایت</p>
+  <h2>خدماتی که بعداً می‌توانند کنار معامله پول بسازند</h2>
+  <p class="note">این صفحه محصول همین سرمایه‌گذاری نیست. فهرست از ماتریس کشف سوپراپ آمده است. هر دسته یک مسیر درآمد است: کارمزد، کمیسیون یا حاشیه فروش. عدد درآمد این خدمات در این طرح نیست. برچسب رنگی همان خدمات محصول هدف خودرو۴۵ است و بقیه افق بازتر سوپراپ یا سوپرسایت‌اند.</p>
+  <div class="svc-grid">
+<div class="card"><span class="tag">کارمزد استعلام و پرداخت</span><h3>خلافی و استعلام</h3><div class="chips"><span>خلافی / استعلام خلافی خودرو</span><span>خلافی موتور</span><span>مشاهده عکس خلافی</span><span>نمره منفی</span></div></div>
+<div class="card"><span class="tag">کارمزد پرداخت عوارض</span><h3>عوارض و طرح ترافیک</h3><div class="chips"><span>عوارض آزادراهی</span><span>عوارض سالانه / سالیانه</span><span>طرح ترافیک</span><span>پارک حاشیه‌ای الیت مشهد</span><span>اشتراک اطلاع‌رسانی</span></div></div>
+<div class="card"><span class="tag">کارمزد استعلام مدرک</span><h3>پلاک و مدارک</h3><div class="chips"><span>پلاک‌های فعال</span><span>استعلام پلاک</span><span>تاریخچه / استعلام تاریخچه پلاک</span><span>مدارک / کارت و سند خودرو</span><span>مدیریت پلاک‌ها</span></div></div>
+<div class="card"><span class="tag">کارمزد استعلام سابقه</span><h3>گواهینامه و سوابق</h3><div class="chips"><span>وضعیت / استعلام گواهینامه</span><span>استعلام سوابق خودرو</span><span>استعلام معاینه فنی</span></div></div>
+<div class="card"><span class="tag">کمیسیون صدور و تمدید</span><h3>بیمه</h3><div class="chips"><span>بیمه / استعلام بیمه شخص ثالث</span><span>بیمه بدنه</span><span>پرداخت اقساط بیمه</span><span>بیمه شخص ثالث قسطی</span></div></div>
+<div class="card"><span class="tag">نگهداشت کاربر برای خدمات پولی</span><h3>مدیریت خودرو</h3><div class="chips"><span>افزودن وسیله نقلیه</span><span>پرداخت خودکار</span></div></div>
+<div class="card"><span class="tag">کارمزد محاسبه و پرداخت</span><h3>مالیات و معاملات</h3><div class="chips"><span>مالیات انتقال خودرو</span><span>مالیات انتقال موتور</span><span>معاملات خودرو</span></div></div>
+<div class="card"><span class="tag">کمیسیون معامله و همکاری در فروش</span><h3>فروش و همکاری</h3><div class="chips"><span class="here">کسب درآمد از همکاری در فروش</span><span class="here">فروش خودرو</span><span class="here">معاوضه خودرو</span></div></div>
+<div class="card"><span class="tag">جذب کاربر به معامله</span><h3>قیمت و ارزیابی</h3><div class="chips"><span class="here">قیمت روز خودرو</span><span class="here">تخمین قیمت خودرو</span></div></div>
+<div class="card"><span class="tag">جذب مخاطب به خدمات پولی</span><h3>رسانه</h3><div class="chips"><span class="here">مجله خودرو۴۵</span></div></div>
+<div class="card"><span class="tag">کمیسیون خرید</span><h3>خرید خودرو</h3><div class="chips"><span class="here">خرید خودرو (آگهی)</span><span class="here">خرید سفارشی خودرو</span><span class="here">خرید خودرو کارکرده</span><span class="here">خرید خودرو صفر</span><span class="here">خرید خودرو اقساطی</span></div></div>
+<div class="card"><span class="tag">حاشیه فروش یدک، سرویس و حمل</span><h3>سرویس‌های جانبی</h3><div class="chips"><span class="here">YADAK45</span><span class="here">SERVICE45</span><span class="here">HAML45</span></div></div>
+<div class="card"><span class="tag">کمیسیون سفارش خدمت</span><h3>تعمیر و نگهداری</h3><div class="chips"><span>تعویض روغن</span><span>کارواش</span><span>تعمیر خودرو در محل</span><span>معاینه فنی</span><span>تعویض باتری</span><span>پنچرگیری</span><span>رزرو معاینه فنی</span><span>حمل خودرو</span><span>کارشناسی خودرو</span></div></div>
+<div class="card"><span class="tag">کمیسیون معامله و قرارداد</span><h3>خرید و فروش</h3><div class="chips"><span>قیمت خودرو فرسوده</span><span>فروش فوری خودرو</span><span>قولنامه‌نویس آنلاین</span><span>قیمت روز خودرو</span><span>مشاوره خرید خودرو</span></div></div>
+<div class="card"><span class="tag">حاشیه فروش قطعه</span><h3>قطعات و لوازم</h3><div class="chips"><span>خرید باتری</span><span>لاستیک خودرو</span><span>قطعات خودرو</span><span>لاستیک دولتی</span><span>روغن و فیلتر</span></div></div>
+<div class="card"><span class="tag">کارمزد و کمیسیون خدمات موتور</span><h3>خدمات موتور</h3><div class="chips"><span>بیمه شخص ثالث موتور</span><span>قطعات موتورسیکلت</span></div></div>
+<div class="card"><span class="tag">کارمزد اعزام</span><h3>خدمات امدادی</h3><div class="chips"><span>مکانیکی (امداد)</span><span>تعویض شیشه و آینه (امداد)</span><span>سوخت‌رسانی (امداد)</span></div></div>
   </div>
 </section>
 <section id="finance" class="gate">
@@ -1966,7 +1996,7 @@ button.spend:hover{border-color:var(--accent)}
     document.getElementById("spendModal").classList.remove("open");
     if (name === "deck") show(index);
     else if (name === "proposal") showProposal(pindex);
-    else document.getElementById("now").textContent = name === "menu" ? "منو" : "نمای مالی";
+    else document.getElementById("now").textContent = name === "menu" ? "منو" : (name === "horizon" ? "افق درآمدزایی" : "نمای مالی");
   }
   document.body.addEventListener("click", function (event) {
     var btn = event.target.closest("[data-open]");
